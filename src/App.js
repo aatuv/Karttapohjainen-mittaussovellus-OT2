@@ -86,6 +86,7 @@ class App extends Component {
             <Kartat kartat={this.state.kartat} setActive={this.setActive} />
           </div>
           <div className="main-content-mittaukset">
+          <h3>*huoneen / anturin nimi tähän*</h3>
             <thead align="center">
               <Headrow />
             </thead>
