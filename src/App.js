@@ -42,14 +42,14 @@ class App extends Component {
       },
       {
         id: 2,
-        timestamp: new Date().toLocaleTimeString(),
+        timestamp: new Date().toISOString(),
         temperature: 21.05,
         airpressure: 991.98,
         humidity: 0.443
       },
       {
         id: 3,
-        timestamp: new Date().toLocaleTimeString(),
+        timestamp: new Date().toISOString(),
         temperature: 22.12,
         airpressure: 994.52,
         humidity: 0.311
