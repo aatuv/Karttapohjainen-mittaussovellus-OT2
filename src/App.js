@@ -86,18 +86,20 @@ class App extends Component {
             <Kartat kartat={this.state.kartat} setActive={this.setActive} />
           </div>
           <div className="main-content-mittaukset">
-          <h3>*huoneen / anturin nimi tähän*</h3>
-            <thead align="center">
-              <Headrow />
-            </thead>
-            <tbody className="mittaus-table" align="center">
-              <Mittaukset mittaukset={this.state.mittaukset} />
-            </tbody>
+            <table className="mittaus-table">
+              <caption>valitun anturin nimi tähän</caption>
+              <thead align="center">
+                <Headrow />
+              </thead>
+              <tbody className="mittaus-tbody">
+                <Mittaukset mittaukset={this.state.mittaukset} />
+              </tbody>
+            </table>
           </div>
         </div>
         <footer className="footer">
-            <h3>footer</h3>
-          </footer>
+          <h3>footer</h3>
+        </footer>
       </div>
     );
   }

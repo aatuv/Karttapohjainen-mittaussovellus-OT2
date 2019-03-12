@@ -6,8 +6,8 @@ export class Valintalaatikko extends Component {
     render() {
         return (
             <div className="selite-div">
-                <button className="kerros1-btn" disabled={this.props.painikkeet[0].disable} onClick={(event) => { this.props.setActive(); this.props.setDisabled() }}>1. kerros</button>
-                <button className="kerros2-btn" disabled={this.props.painikkeet[1].disable} onClick={(event) => { this.props.setActive(); this.props.setDisabled() }}>2. kerros</button>
+                <button id="kerros1" className="kerros-btn" disabled={this.props.painikkeet[0].disable} onClick={(event) => { this.props.setActive(); this.props.setDisabled() }}>1. kerros</button>
+                <button id="kerros2" className="kerros-btn" disabled={this.props.painikkeet[1].disable} onClick={(event) => { this.props.setActive(); this.props.setDisabled() }}>2. kerros</button>
                 <div className="ul-div">
                     <ul className="selite-ul">
                         <li className="valk">= Tilassa ei anturia</li>

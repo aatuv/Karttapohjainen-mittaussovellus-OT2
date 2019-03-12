@@ -4,75 +4,146 @@
   padding: 0;
 }
 
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 body {
-  font-family: Arial, Arial, Helvetica, sans-serif;
-  line-height: 1.4;
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: rgb(58, 57, 57);
+  background: #eee;
 }
 
 a {
   color: #333;
   text-decoration: none;
 }
+
 .container {
   display: grid;
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   grid-template-columns: [mainContentKartta] 60% [mainContentMittaukset] 40%;
-  grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;  
+  grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #db69d6;
+  background: #c7c5c7;
 }
+
 .header {
-  top: 0; left: 0; right: 0;
-  background-color: #eba845;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #b8b7b6;
 }
+
 .main-content-kartta {
   grid-column-start: mainContentKartta;
   grid-column-end: mainContentKartta;
   grid-row-start: mainRow;
   grid-row-end: mainRow;
-  background-color: #db4621;
+  background: #dddcdc;
 }
+
 .main-content-mittaukset {
   padding: 15px;
   grid-column-start: mainContentMittaukset;
   grid-column-end: mainContentMittaukset;
   grid-row-start: mainRow;
   grid-row-end: mainRow;
-  background-color: #28b14a;
+  background: #b1b0b0;
 }
+
 .footer {
-  background-color: #50baeb;
+  background: #6d6e6e;
 }
+
 .anturi:active {
   fill: red;
 }
+
 .huone:hover path {
   cursor: pointer;
-  fill: #505050;
+  fill: #837f7f;
 }
+
 button:disabled {
   border: 1px solid #999999;
-  background-color: #cccccc;
+  background: #cccccc;
   color: #666666;
 }
+
 button:disabled:hover {
   cursor: not-allowed;
   border: 1px solid #999999;
-  background-color: #cccccc;
+  background: #cccccc;
   color: #666666;
 }
+
 .mittaus-table {
+  width: 100%;
+  border-collapse: separate;
+  float: center;
+  background: #cfcdcd;
+  border-radius: .4em;
+  overflow: hidden;
+  color: #155799;
 }
+
 .table-header {
-  padding: 15px;
+  padding: .5em;
 }
+
 .mittaus-td {
   align-self: center;
-  padding: 15px;
+  padding: .65em;
 }
+
 thead, tbody, th, td {
-  border: 1px solid black;
+  border-color: gray;
+}
+
+tbody tr:nth-child(odd) {
+  background: rgb(231, 229, 229);
+}
+
+th {
+  font-weight: bold;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-color: lighten(#34495E, 10%);
+  transition: .2s ease-in-out;
+}
+
+tr:hover td {
+  background: #155799;
+  color: #fff;
+}
+
+tr:hover:active:focus {
+  border: 1px solid #155799;
+}
+
+caption {
+  padding: .65em;
+  background: rgb(231, 229, 229);
+  border-radius: .4em;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
 }

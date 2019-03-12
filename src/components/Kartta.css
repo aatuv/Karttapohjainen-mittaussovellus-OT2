@@ -1,68 +1,88 @@
 .selite-div {
+    color: #155799;
     display: grid;
-    background-color: #f3f3f3;
+    background-color: #fff;
     grid-template-columns: auto [btn1] 20% auto [btn2] 20% auto [selite] 40%;
     grid-template-rows: [ylarivi] 25% [ylakeski] 25% [alakeski] 25% [alarivi] 25%;
-  } 
-.kerros1-btn {
-    all: unset;
-    grid-column-start : btn1;
-    grid-column-end : btn1;
-    grid-row-start : ylakeski;
-    grid-row-end : alakeski;
+}
+
+.kerros-btn {
+    width: 250px;
     height: 60px;
-    text-align: center;
-    padding: .5em 1.25em;
-    background-color:rgb(136, 177, 117);
-    color:rgb(255, 255, 255);
-    border-radius: .25em;
+    margin: 10px;
+    border: 2px solid #155799;
+    padding: 6px 24px;
+    font-size: 1.15em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #155799;
+    background-color: #fff;
+    transition: .1s ease-in-out;
 }
-.kerros1-btn:hover {
-        background-color: #446944;
+
+.kerros-btn:hover {
+    background-color: #155799;
+    border-color: #155799;
+    color: #fff;
 }
-.kerros2-btn {
-    all: unset;
-    grid-column-start : btn2;
-    grid-column-end : btn2;
-    grid-row-start : ylakeski;
-    grid-row-end : alakeski;
-    height: 60px;
-    text-align: center;
-    padding: .5em 1.25em;
-    background-color:rgb(136, 177, 117);
-    color:rgb(255, 255, 255);
-    border-radius: .25em;
-  }
-.kerros2-btn:hover {
-    background-color: #446944;
+
+.kerros-btn:active:focus {
+    color: #fff;
+    outline: 3px auto #155799;
 }
+
+
+.kerros-btn:visited {
+    background-color: #155799;
+    border-color: #155799;
+}
+
+#kerros1 {
+    grid-column-start: btn1;
+    grid-column-end: btn1;
+    grid-row-start: ylakeski;
+    grid-row-end: alakeski;
+}
+
+#kerros2 {
+    grid-column-start: btn2;
+    grid-column-end: btn2;
+    grid-row-start: ylakeski;
+    grid-row-end: alakeski;
+}
+
 .ul-div {
-    grid-column-start : selite;
-    grid-column-end : selite;
-    grid-row-start : ylarivi;
-    grid-row-end : alarivi;
+    grid-column-start: selite;
+    grid-column-end: selite;
+    grid-row-start: ylarivi;
+    grid-row-end: alarivi;
 }
+
 ul.selite-ul {
     list-style-type: none;
 }
+
 li.valk {
     background: url('./images/valk.jpg') no-repeat left top;
     height: 54px;
     padding-left: 50px;
     padding-top: 3px;
 }
+
 li.vihr {
     background: url('./images/vihr.jpg') no-repeat left top;
     height: 54px;
     padding-left: 50px;
     padding-top: 3px;
 }
+
 li.kelt {
     background: url('./images/kelt.jpg') no-repeat left top;
     height: 54px;
     padding-left: 50px;
     padding-top: 3px;
 }
+
 li.tumv {
     background: url('./images/tumv.jpg') no-repeat left top;
     height: 54px;
