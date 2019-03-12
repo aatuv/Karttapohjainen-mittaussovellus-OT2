@@ -1,0 +1,71 @@
+.selite-div {
+    display: grid;
+    background-color: #f3f3f3;
+    grid-template-columns: auto [btn1] 20% auto [btn2] 20% auto [selite] 40%;
+    grid-template-rows: [ylarivi] 25% [ylakeski] 25% [alakeski] 25% [alarivi] 25%;
+  } 
+.kerros1-btn {
+    all: unset;
+    grid-column-start : btn1;
+    grid-column-end : btn1;
+    grid-row-start : ylakeski;
+    grid-row-end : alakeski;
+    height: 60px;
+    text-align: center;
+    padding: .5em 1.25em;
+    background-color:rgb(136, 177, 117);
+    color:rgb(255, 255, 255);
+    border-radius: .25em;
+}
+.kerros1-btn:hover {
+        background-color: #446944;
+}
+.kerros2-btn {
+    all: unset;
+    grid-column-start : btn2;
+    grid-column-end : btn2;
+    grid-row-start : ylakeski;
+    grid-row-end : alakeski;
+    height: 60px;
+    text-align: center;
+    padding: .5em 1.25em;
+    background-color:rgb(136, 177, 117);
+    color:rgb(255, 255, 255);
+    border-radius: .25em;
+  }
+.kerros2-btn:hover {
+    background-color: #446944;
+}
+.ul-div {
+    grid-column-start : selite;
+    grid-column-end : selite;
+    grid-row-start : ylarivi;
+    grid-row-end : alarivi;
+}
+ul.selite-ul {
+    list-style-type: none;
+}
+li.valk {
+    background: url('./images/valk.jpg') no-repeat left top;
+    height: 54px;
+    padding-left: 50px;
+    padding-top: 3px;
+}
+li.vihr {
+    background: url('./images/vihr.jpg') no-repeat left top;
+    height: 54px;
+    padding-left: 50px;
+    padding-top: 3px;
+}
+li.kelt {
+    background: url('./images/kelt.jpg') no-repeat left top;
+    height: 54px;
+    padding-left: 50px;
+    padding-top: 3px;
+}
+li.tumv {
+    background: url('./images/tumv.jpg') no-repeat left top;
+    height: 54px;
+    padding-left: 50px;
+    padding-top: 3px;
+}

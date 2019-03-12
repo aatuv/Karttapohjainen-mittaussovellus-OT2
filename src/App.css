@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+.container {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  grid-template-columns: [mainContentKartta] 60% [mainContentMittaukset] 40%;
+  grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;  
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #db69d6;
+}
+.header {
+  top: 0; left: 0; right: 0;
+  background-color: #eba845;
+}
+.main-content-kartta {
+  grid-column-start: mainContentKartta;
+  grid-column-end: mainContentKartta;
+  grid-row-start: mainRow;
+  grid-row-end: mainRow;
+  background-color: #db4621;
+}
+.main-content-mittaukset {
+  padding: 15px;
+  grid-column-start: mainContentMittaukset;
+  grid-column-end: mainContentMittaukset;
+  grid-row-start: mainRow;
+  grid-row-end: mainRow;
+  background-color: #28b14a;
+}
+.footer {
+  background-color: #50baeb;
+}
+.anturi:active {
+  fill: red;
+}
+.huone:hover path {
+  cursor: pointer;
+  fill: #505050;
+}
+button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+button:disabled:hover {
+  cursor: not-allowed;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.mittaus-table {
+}
+.table-header {
+  padding: 15px;
+}
+.mittaus-td {
+  align-self: center;
+  padding: 15px;
+}
+thead, tbody, th, td {
+  border: 1px solid black;
+}
