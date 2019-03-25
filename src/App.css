@@ -31,7 +31,8 @@ a {
   display: grid;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 100%;
+  height: 100%;
   grid-template-columns: [mainContentKartta] 60% [mainContentMittaukset] 40%;
   grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;
   margin-left: auto;
@@ -90,7 +91,6 @@ button:disabled:hover {
 }
 
 .mittaus-table {
-  width: 100%;
   border-collapse: separate;
   float: center;
   background: #cfcdcd;
@@ -121,6 +121,7 @@ tbody tr:nth-child(odd) {
   letter-spacing: .05em;
   text-transform: uppercase;
 }
+
 .header-row {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -152,4 +153,16 @@ caption {
   text-transform: uppercase;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
+}
+.img-preview-div {
+  padding: 10px;
+  width: 700px;
+  height: 400px;
+}
+.img-preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+.input-file {
+  width: 50px;
 }

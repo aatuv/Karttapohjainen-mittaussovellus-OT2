@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
+import Image from 'react-bootstrap/Image';
+import Spinner from 'react-bootstrap/Spinner';
 import PropTypes from 'prop-types';
 
 export class Kartta extends Component {
-    getStyle = () => {
-        return {
-            visibility: this.props.kartta.active ? 'visible' : 'hidden',
-            top: this.props.kartta.active ? '0' : '0',
-            left: this.props.kartta.active ? '0' : '0'
-        }
+
+    state = {
+        loading: true
     }
+    /*
+    handleLoading() {
+        new Promise(resolve => {
+                resolve(this.setState({
+                    loading: true
+                }))
+        }).then(() => {
+            setTimeout(() => {
+                this.setState({
+                    loading: false
+                })
+            }, 1000);
+        })
+    }
+    */
+   componentDidMount() {
+       this.setState({ loading: false })
+   }
     render() {
-        const { title, content } = this.props.kartta;
-        if (this.props.kartta.active) {
-        return (
-            <div className="kartta" style={this.getStyle()}>
-                <h3>{title}</h3>
-                {content}
-            </div>
-        )
+        if (this.props.kartta != null) {
+            return (
+                this.state.loading ? <Spinner animation="border"></Spinner>
+                : <div className="kartta">
+                    <Image src={this.props.kartta.value} fluid />
+                </div>
+            )
         } else {
             return null;
         }
@@ -26,7 +42,7 @@ export class Kartta extends Component {
 
 //PropTypes
 Kartta.propTypes = {
-    kartta: PropTypes.object.isRequired
+    kartta: PropTypes.object
 }
 
 

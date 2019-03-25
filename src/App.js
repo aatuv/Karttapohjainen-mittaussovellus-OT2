@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Kartat from './components/Kartat';
+import Kartta from './components/Kartta';
 import Mittaukset from './components/Mittaukset';
 import Headrow from './components/Headrow';
 import Valintalaatikko from './components/Valintalaatikko';
@@ -9,52 +9,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   state = {
-    kartat: [
-      {
-        value: "public/kartta1.png",
-        label: "eka kerros"
-      },
-      {
-        value: "public/kartta2.png",
-        label: "toinen kerros"
-      },
-      {
-        value: "public/kartta3.png",
-        label: "kolmas kerros"
-      },
-      {
-        value: "public/kartta4.png",
-        label: "neljäs kerros"
-      }
-    ],
+    kartat: [],
     mittaukset: [],
-    anturit: [
-      {
-        value: "public/kartta1.png",
-        label: "eka kerros"
-      },
-      {
-        value: "public/kartta2.png",
-        label: "toinen kerros"
-      },
-      {
-        value: "public/kartta3.png",
-        label: "kolmas kerros"
-      },
-      {
-        value: "public/kartta4.png",
-        label: "neljäs kerros"
-      }
-    ]
+    anturit: [],
+    selectedMap: null
   }
 
-  addKartta = (newValue) => {
-    this.state.kartat.push(
-      {
-        value: newValue.value,
-        label: newValue.label
-      }
-    );
+  addKartta = (newKartta) => {
+    const { kartat } = this.state;
+    this.setState({ kartat: [...kartat, newKartta] });
+    console.table(this.state.kartat);
+ 
+  }
+  setSelected = (inputValue) => {
+    this.setState({ selectedMap: inputValue });
   }
   render() {
     return (
@@ -64,8 +32,8 @@ class App extends Component {
         </header>
         <div className="container">
           <div className="main-content-kartta">
-            <Valintalaatikko kartat={this.state.kartat} anturit={this.state.anturit} addKartta={this.addKartta} />
-            <Kartat kartat={this.state.kartat} />
+            <Valintalaatikko kartat={this.state.kartat} setSelected={this.setSelected} anturit={this.state.anturit} addKartta={this.addKartta} />
+            <Kartta kartta={this.state.selectedMap} />
           </div>
           <div className="main-content-mittaukset">
             <table className="mittaus-table">
