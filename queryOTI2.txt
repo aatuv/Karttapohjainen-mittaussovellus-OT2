@@ -1,0 +1,131 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Mar 27, 2019 at 01:22 PM
+-- Server version: 10.2.14-MariaDB
+-- PHP Version: 5.6.35
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `oti2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anturi`
+--
+
+DROP TABLE IF EXISTS `anturi`;
+CREATE TABLE IF NOT EXISTS `anturi` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
+  `DESCRIPTION` varchar(60) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NAME` (`NAME`),
+  UNIQUE KEY `DESCRIPTION` (`DESCRIPTION`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `anturi_sijainti`
+--
+
+DROP TABLE IF EXISTS `anturi_sijainti`;
+CREATE TABLE IF NOT EXISTS `anturi_sijainti` (
+  `KARTTA_ID` int(11) NOT NULL,
+  `ANTURI_ID` int(11) NOT NULL,
+  `X` double NOT NULL DEFAULT 0,
+  `Y` double NOT NULL DEFAULT 0,
+  KEY `KARTTA_ID` (`KARTTA_ID`),
+  KEY `ANTURI_ID` (`ANTURI_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `data`
+--
+
+DROP TABLE IF EXISTS `data`;
+CREATE TABLE IF NOT EXISTS `data` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MITTAUS_ID` int(11) NOT NULL,
+  `TEMPERATURE` decimal(3,1) DEFAULT NULL,
+  `ATMOSP_PRESSURE` decimal(6,2) DEFAULT NULL,
+  `REL_AIR_HUMIDITY` decimal(4,4) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_Mittaus` (`MITTAUS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kartta`
+--
+
+DROP TABLE IF EXISTS `kartta`;
+CREATE TABLE IF NOT EXISTS `kartta` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
+  `PATH` varchar(2083) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `NAME` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mittaus`
+--
+
+DROP TABLE IF EXISTS `mittaus`;
+CREATE TABLE IF NOT EXISTS `mittaus` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ANTURI_ID` int(11) NOT NULL,
+  `TIMESTAMP` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `NOTE` varchar(60) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_Anturi` (`ANTURI_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `anturi_sijainti`
+--
+ALTER TABLE `anturi_sijainti`
+  ADD CONSTRAINT `anturi_sijainti_ibfk_1` FOREIGN KEY (`KARTTA_ID`) REFERENCES `kartta` (`ID`),
+  ADD CONSTRAINT `anturi_sijainti_ibfk_2` FOREIGN KEY (`ANTURI_ID`) REFERENCES `anturi` (`ID`);
+
+--
+-- Constraints for table `data`
+--
+ALTER TABLE `data`
+  ADD CONSTRAINT `FK_Mittaus` FOREIGN KEY (`MITTAUS_ID`) REFERENCES `mittaus` (`ID`);
+
+--
+-- Constraints for table `mittaus`
+--
+ALTER TABLE `mittaus`
+  ADD CONSTRAINT `FK_Anturi` FOREIGN KEY (`ANTURI_ID`) REFERENCES `anturi` (`ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
