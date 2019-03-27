@@ -1,0 +1,67 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+-- --------------------------------------------------------
+
+DROP TABLE IF EXISTS `kartta`;
+CREATE TABLE IF NOT EXISTS `kartta` (
+`ID` int NOT NULL AUTO_INCREMENT,
+`NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
+`PATH` varchar(2083) CHARACTER SET latin1 NOT NULL,
+ UNIQUE KEY (`NAME`),
+ PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+DROP TABLE IF EXISTS `anturi`;
+CREATE TABLE IF NOT EXISTS `anturi` (
+`ID` int NOT NULL AUTO_INCREMENT,
+`NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
+ PRIMARY KEY (`ID`),
+ UNIQUE KEY (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+-- -------------------------------------------------------
+
+DROP TABLE IF EXISTS `mittaus`;
+CREATE TABLE IF NOT EXISTS `mittaus` (
+`ID` int NOT NULL AUTO_INCREMENT,
+`ANTURI_ID` int NOT NULL,
+`TIMESTAMP` TIMESTAMP NOT NULL,
+ PRIMARY KEY (`ID`),
+ CONSTRAINT FK_Anturi FOREIGN KEY (`ANTURI_ID`)
+ REFERENCES `anturi`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+-- ---------------------------------------------------------
+
+DROP TABLE IF EXISTS `data`;
+CREATE TABLE IF NOT EXISTS `data` (
+`ID` int NOT NULL AUTO_INCREMENT,
+`MITTAUS_ID` int NOT NULL,
+`TEMPERATURE` DECIMAL(3,1),
+`ATMOSP_PRESSURE` DECIMAL(6,2),
+`REL_AIR_HUMIDITY` NUMERIC(4,4),
+ PRIMARY KEY (`ID`),
+ CONSTRAINT FK_Mittaus FOREIGN KEY (`MITTAUS_ID`)
+ REFERENCES `mittaus`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+-- ---------------------------------------------------------
+
+DROP TABLE IF EXISTS `anturi_sijainti`;
+CREATE TABLE IF NOT EXISTS `anturi_sijainti` (
+`KARTTA_ID` int NOT NULL,
+`ANTURI_ID` int NOT NULL,
+`X` DOUBLE DEFAULT 0 NOT NULL,
+`Y` DOUBLE DEFAULT 0 NOT NULL,
+ FOREIGN KEY (`KARTTA_ID`)
+ REFERENCES `kartta`(`ID`),
+ FOREIGN KEY (`ANTURI_ID`)
+ REFERENCES `anturi`(`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
+
+-- --------------------------------------------------------
+
+
+COMMIT;
