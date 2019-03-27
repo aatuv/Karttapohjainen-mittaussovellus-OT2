@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const sensors = require('./api/routes/sensors');
 const maps = require('./api/routes/maps');
 const locations = require('./api/routes/locations');
+const cors = require('cors');
 
 
 const app = express();
-
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
