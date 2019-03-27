@@ -1,0 +1,21 @@
+DATABASE CONNECTION STRINGS
+
+NODE:
+Driver={ODBC Driver 13 for SQL Server};Server=tcp:oti2.database.windows.net,1433;Database=OTI2;Uid=iiroli@oti2;Pwd={your_password_here};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;
+
+PHP:
+// PHP Data Objects(PDO) Sample Code:
+try {
+    $conn = new PDO("sqlsrv:server = tcp:oti2.database.windows.net,1433; Database = OTI2", "iiroli", "{your_password_here}");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
+}
+
+// SQL Server Extension Sample Code:
+$connectionInfo = array("UID" => "iiroli@oti2", "pwd" => "{your_password_here}", "Database" => "OTI2", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
+$serverName = "tcp:oti2.database.windows.net,1433";
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+
