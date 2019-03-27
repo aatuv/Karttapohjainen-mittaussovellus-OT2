@@ -2,7 +2,7 @@ var conn = require('../../db');
 
 module.exports = 
 {
-    fetchLocation: (req, res) => {
+    fetchLocations: (req, res) => {
         conn.query('SELECT * FROM anturi_sijainti WHERE KARTTA_ID = ?, ANTURI_ID = ?, X = ?, Y = ?', [req.query.kartta_id, req.query.anturi_id, req.query.x, req.query.y], (err, rows) => {
             if (err) {
                 res.status(500).json({
