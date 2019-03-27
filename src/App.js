@@ -13,37 +13,76 @@ class App extends Component {
   state = {
     kartat: [],
     mittaukset: [],
-    anturit: [
-      {
-        id: 34523,
-        name: "anturi1"
-      },
-      {
-        id: 34523,
-        name: "anturi1"
-      },
-      {
-        id: 34523,
-        name: "anturi1"
-      }
-    ],
+    anturit: [],
     selectedMap: null
   }
 
+  // haetaan kartat, kun pääkomponentti kiinnittyy
   componentDidMount() {
-    Axios.get('http://localhost:3001/maps')
-    .then(res => console.log(res.data));
+    this.getKartat();
+    this.getAnturit();
 }
 
+// palauttaa listan tietokannassa olevista kartoista
+getKartat() {
+  Axios.get('http://localhost:3001/maps')
+  .then(res => this.setState({
+    kartat: this.returnKartat(res.data)
+  }));
+}
+
+// palauttaa listan tietokannassa olevista antureista
+getAnturit() {
+  Axios.get('http://localhost:3001/sensors')
+  .then(res => this.setState({
+    anturit: this.returnAnturit(res.data)
+  }));
+}
+
+// tietokannasta haettu karttalista muotoon, jossa projektissa käytettävä kirjasto react-select pystyy käsittelemään sitä
+returnKartat = (kartat) => {
+  let tmp = [];
+  kartat.map((kartta) => {
+    tmp.push({
+      id: kartta.ID,
+      label: kartta.NAME,
+      value: kartta.PATH
+    })
+    return 0;
+  })
+  console.table(tmp);
+  return tmp;
+}
+
+// tietokannasta haettu karttalista muotoon, jossa projektissa käytettävä kirjasto react-select pystyy käsittelemään sitä
+returnAnturit = (anturit) => {
+  let tmp = [];
+  anturit.map((anturi) => {
+    tmp.push({
+      id: anturi.ID,
+      label: anturi.NAME,
+      value: anturi.DESCRIPTION
+    })
+    return 0;
+  })
+  console.table(tmp);
+  return tmp;
+}
+
+// lisätään kartan tiedot (nimi, osoite) tietokantaan
   addKartta = (newKartta) => {
-    const { kartat } = this.state;
-    this.setState({ kartat: [...kartat, newKartta] });
-    console.table(this.state.kartat);
+    Axios.post('http://localhost:3001/maps', newKartta)
+    .then(res => {
+      this.getKartat();
+      console.log(res.data);
+    })
  
   }
+  // asetetaan valittu kartta
   setSelected = (inputValue) => {
     this.setState({ selectedMap: inputValue });
   }
+  // renderöidään komponentti
   render() {
     return (
       <div className="App">

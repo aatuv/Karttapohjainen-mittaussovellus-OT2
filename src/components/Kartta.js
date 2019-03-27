@@ -8,10 +8,12 @@ class Kartta extends Component {
         super(props);
         this.onLoad = this.onLoad.bind(this);
     }
+
     state = {
         dimensions: {}
     }
 
+    // ladatessa kuvatiedosto, asetetaan komponentin tilaan sen isäelementin (johon kuva sovittuu) mitat
     onLoad({target:div}) {
         this.setState({
             dimensions: {
@@ -20,7 +22,7 @@ class Kartta extends Component {
             }
         })
     }
-    
+    // renderöidään komponentti
     render() {
         if (this.props.kartta != null) {
             return (

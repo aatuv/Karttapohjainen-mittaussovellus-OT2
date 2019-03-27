@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 
+// modal kartan lisäykseen
 class KartanLisays extends Component {
   constructor(props, context) {
     super(props, context);
@@ -24,6 +25,7 @@ class KartanLisays extends Component {
     };
   }
 
+  // käsitellään valittu tiedosto
   fileSelectedHandler(e) {
     e.preventDefault();
     let file = e.target.files[0];
@@ -37,6 +39,7 @@ class KartanLisays extends Component {
     reader.readAsDataURL(file);
   }
 
+  // kuvatiedoston lähettäminen googlen firebase-pilvipalvelimelle
   fileUploadHandler = () => {
     const fd = new FormData();
     fd.append('image', this.state.selectedFile, this.props.newKartta.label);

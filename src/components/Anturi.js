@@ -12,8 +12,12 @@ class Anturi extends Component {
         let y = e.clientY - bounds.top;
         console.log({x, y});
     }
-    */    
+    */
+state = {
+    active: false
+}    
 
+// metodi käsittelee anturielementin paikan muutokset kartan päällä
 onDrag = () => {
     console.log("päivitetty");
     return;
@@ -35,7 +39,7 @@ onDrag = () => {
     }
     const AnturiComponent = posed.div(config);
     return (
-        <AnturiComponent onDragEnd={{x: console.log("asd") }} className="anturiComponent" />
+        <AnturiComponent className="anturiComponent" />
     )
   }
 }

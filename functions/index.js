@@ -1,3 +1,7 @@
+/*
+ Firebaseen tallennettavien kuvien (kartat) hallintaan keskittyvien funktioiden luonti
+ */
+
 const functions = require('firebase-functions');
 const os = require('os');
 const path = require('path');
@@ -11,11 +15,10 @@ const gcs = new Storage({
     keyFilename: "mittarointi-sovellus-firebase-adminsdk-bc6gz-1bfcc8c0fc.json"
 });
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
 exports.onFileChange = functions.storage.object().onFinalize((object, context) => {
 });
+
+// kuvan lisääminen
 exports.onFileUpload = functions.https.onRequest((req, res) => {
     cors(req, res, () => {
 

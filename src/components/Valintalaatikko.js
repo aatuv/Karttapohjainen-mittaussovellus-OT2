@@ -9,9 +9,9 @@ import Axios from 'axios';
 
 
 
-// luodaan alasvetovalikkoon uusi kartta
+// luodaan alasvetovalikkoon uusi pohja
 const createOption = (label) => ({
-    label,
+    label: label,
     value: null
 });
 
@@ -27,20 +27,23 @@ class Valintalaatikko extends Component {
     }
     state = {
         isLoading: false,
-        value: null,
+        kartta: null,
+        anturi: null,
         modalOpen: false,
         showSuccess: false,
         showError: false,
         errorMsg: null,
-        maxKarttaInputLenght: 30
+        maxInputLenght: 30
     };
 
+    // kartan lisäysikkunan sulkeminen
     modalCloseHandler() {
         this.setState({
             isLoading: false,
             modalOpen: false
         })
     }
+    // näytetään ilmoitus, kun kartan lisäys onnistuu
     handleShowSuccess = () => {
         new Promise(resolve => {
             setTimeout(
@@ -55,6 +58,7 @@ class Valintalaatikko extends Component {
             }, 1000);
         })
     }
+    // näytetään virheilmoitus, jos kartan lisäys epäonnistuu
     handleShowError = (message) => {
         console.log("message: " + message)
         new Promise(resolve => {
@@ -72,40 +76,61 @@ class Valintalaatikko extends Component {
         })
     }
 
-    handleChange = (newValue, actionMeta) => {
-        console.group('Value Changed');
-        console.log(newValue);
-        console.log(`action: ${actionMeta.action}`);
-        console.groupEnd();
-        console.table(this.props.kartat);
-        this.setState({ value: newValue });
+    // käsitellään kartan valinnan muutokset alasvetovalikossa
+    handleKChange = (newValue) => {
+        this.setState({ kartta: newValue });
         this.props.setSelected(newValue);
     };
 
+    // käsitellään anturin valinnan muutokset alasvetovalikossa
+    handleAChange = (newValue) => {
+        this.setState({ anturi: newValue });
+    };
+
+    // uuden kartan luonnin käsittely
     handleCreate = (inputValue) => {
         this.setState({ isLoading: true, modalOpen: true });
         this.newKartta = createOption(inputValue);
     };
 
+    // palauttaa karttavaihtoehdot hakusyötteen mukaan
     karttaOptions = (inputValue) => {
-        return this.props.kartat.filter(i =>
-            i.label.toLowerCase().includes(inputValue.toLowerCase())
+        return this.props.kartat.filter(kartta =>
+            kartta.label.toLowerCase().includes(inputValue.toLowerCase())
         );
     };
 
-    promiseOptions = inputValue =>
+    // palauttaa anturivaihtoehdot hakusyötteen mukaan
+    anturiOptions = (inputValue) => {
+        return this.props.anturit.filter(anturi =>
+            anturi.label.toLowerCase().includes(inputValue.toLowerCase())
+        );
+    };
+
+    // karttavaihtoehdot
+    promiseKartat = inputValue =>
         new Promise(resolve => {
             setTimeout(() => {
                 resolve(this.karttaOptions(inputValue));
             }, 1000);
         });
 
+    // anturivaihtoehdot
+    promiseAnturit = inputValue =>
+        new Promise(resolve => {
+            setTimeout(() => {
+                resolve(this.anturiOptions(inputValue));
+            }, 1000);
+        });
+
+        // asetetaan uusi kartta
     setNewKartta = (newKartta) => {
         this.newKartta = newKartta;
     }
 
 
     render() {
+        // kartan lisäysikkuna näytetään vain, jos käyttäjä painaa lisäysnappia alasvetovalikossa
         let LisaysModal;
 
         if (this.state.modalOpen) {
@@ -139,7 +164,7 @@ class Valintalaatikko extends Component {
                         </Alert>
                     </Modal.Body>
                 </Modal>
-                <div className="row">
+                <div className="row valinnat">
                     <div className="col-md-5">Etsi, lisää, selaa ja valitse karttoja:</div>
                     <div className="col-md-5">Etsi, selaa ja valitse antureita:</div>
                 </div>
@@ -155,20 +180,24 @@ class Valintalaatikko extends Component {
                             onInputChange={inputValue => (
                                 inputValue.length <= this.state.maxKarttaInputLenght ? inputValue : inputValue.substr(0, this.state.maxKarttaInputLenght))
                             }
-                            loadOptions={this.promiseOptions}
+                            loadOptions={this.promiseKartat}
                             isLoading={this.state.isLoading}
-                            onChange={this.handleChange}
+                            onChange={this.handleKChange}
                             onCreateOption={this.handleCreate}
-                            value={this.state.value}
+                            value={this.state.kartta}
                         />
                     </div>
                     <div className="col-md-5">
                         <ASyncSelect
                             placeholder="Selaa antureita"
                             cacheOptions
-                            isSearchable={false}
                             defaultOptions
-                            loadOptions={this.promiseOptions}
+                            loadOptions={this.promiseAnturit}
+                            onChange={this.handleAChange}
+                            value={this.state.anturi}
+                            onInputChange={inputValue => (
+                                inputValue.length <= this.state.maxInputLenght ? inputValue : inputValue.substr(0, this.state.maxInputLenght))
+                            }
                         />
                     </div>
                 </div>
@@ -180,10 +209,12 @@ class Valintalaatikko extends Component {
     }
 }
 
+//PropTypes
 Valintalaatikko.propTypes = {
     kartat: PropTypes.array.isRequired,
     anturit: PropTypes.array.isRequired,
-    addKartta: PropTypes.func.isRequired
+    addKartta: PropTypes.func.isRequired,
+    setSelected: PropTypes.func.isRequired
 }
 
 export default Valintalaatikko
