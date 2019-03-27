@@ -5,15 +5,35 @@ import Headrow from './components/Headrow';
 import Valintalaatikko from './components/Valintalaatikko';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Axios from 'axios';
+
 
 
 class App extends Component {
   state = {
     kartat: [],
     mittaukset: [],
-    anturit: [],
+    anturit: [
+      {
+        id: 34523,
+        name: "anturi1"
+      },
+      {
+        id: 34523,
+        name: "anturi1"
+      },
+      {
+        id: 34523,
+        name: "anturi1"
+      }
+    ],
     selectedMap: null
   }
+
+  componentDidMount() {
+    Axios.get('http://localhost:3001/maps')
+    .then(res => console.log(res.data));
+}
 
   addKartta = (newKartta) => {
     const { kartat } = this.state;
@@ -33,7 +53,7 @@ class App extends Component {
         <div className="container">
           <div className="main-content-kartta">
             <Valintalaatikko kartat={this.state.kartat} setSelected={this.setSelected} anturit={this.state.anturit} addKartta={this.addKartta} />
-            <Kartta kartta={this.state.selectedMap} />
+            <Kartta kartta={this.state.selectedMap} anturit={this.state.anturit} />
           </div>
           <div className="main-content-mittaukset">
             <table className="mittaus-table">
