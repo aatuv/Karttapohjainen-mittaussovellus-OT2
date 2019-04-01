@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 class Kartta extends Component {
     constructor(props) {
         super(props);
-        this.moveRef = React.createRef();
+        this.ref = React.createRef();
         this.onLoad = this.onLoad.bind(this);
     }
     state = {
@@ -15,21 +15,23 @@ class Kartta extends Component {
         y: 0
     }
 
-    onDragStart(e) {
-        e.preventDefault();
-        let currTarget = e.currentTarget.getBoundingClientRect();
-        const offsetX = e.pageX - currTarget.left;
-        const offsetY = e.pageY - currTarget.top;
-        console.log(currTarget)
+    onDragEnd(e) {
+        const k = e.target.parentElement;
+        const kartta = k.getBoundingClientRect();
+        const offsetX = Math.round(e.pageX - kartta.left);
+        const offsetY = Math.round(e.pageY - kartta.top);
+        if (offsetX < 0 || offsetX > kartta.width || offsetY < 0 || offsetY > kartta.height) { // ei tallenneta koordinaatteja, jos kursori viedään yli kartasta
+            return;
+        }
         console.log(` x: ${offsetX}, y: ${offsetY} `);
-        this.setState({ x: offsetX, y: offsetY });
-      }
+        this.props.setSijainti(offsetX, offsetY, this.props.selectedKarttaId, this.props.anturi.id);
+    }
     // ladatessa kuvatiedosto, asetetaan komponentin tilaan sen isäelementin (johon kuva sovittuu) mitat
-    onLoad({target:div}) {
+    onLoad({ target: div }) {
         this.setState({
             dimensions: {
-            height: div.offsetHeight,
-            width: div.offsetWidth
+                height: div.offsetHeight,
+                width: div.offsetWidth
             }
         })
     }
@@ -37,13 +39,18 @@ class Kartta extends Component {
     render() {
         if (this.props.selectedKartta != null) {
             return (
-                <>
-                <h1>{this.state.x} : {this.state.y}</h1>
-                <div ref="elem" onLoad={this.onLoad} className="kartta">
-                    <Image className="img-kartta" src={this.props.selectedKartta.value} fluid />
-                    <Anturit anturit={this.props.anturit} dimensions={this.state.dimensions} selectedAnturi={this.props.selectedAnturi} onDragStart={this.onDragStart} />
+                <div onLoad={this.onLoad} className="kartta">
+                    <Image ref={this.ref} className="img-kartta" src={this.props.selectedKartta.value} fluid />
+                    <Anturit
+                        anturit={this.props.anturit}
+                        dimensions={this.state.dimensions}
+                        selectedAnturi={this.props.selectedAnturi}
+                        anturiSijainnit={this.props.anturiSijainnit}
+                        onDragEnd={this.onDragEnd}
+                        setSijainti={this.props.setSijainti}
+                        selectedKarttaId={this.props.selectedKartta.id}
+                    />
                 </div>
-                </>
             )
         } else {
             return null;
@@ -55,7 +62,9 @@ class Kartta extends Component {
 Kartta.propTypes = {
     selectedKartta: PropTypes.object,
     anturit: PropTypes.array.isRequired,
-    selectedAnturi: PropTypes.object
+    selectedAnturi: PropTypes.object,
+    anturiSijainnit: PropTypes.array.isRequired,
+    setSijainti: PropTypes.func.isRequired
 }
 
 

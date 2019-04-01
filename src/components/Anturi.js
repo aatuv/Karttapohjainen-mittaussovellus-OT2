@@ -19,20 +19,12 @@ updateLocation(e) {
 
     // metodi käsittelee anturielementin paikan muutokset kartan päällä
 
-    getAnturiStyle = () => {
-        if (this.props.anturi.id === this.props.selectedAnturi.id) {
-            this.setState({
-                active: true
-            })
-        } else {
-            this.setState({
-                active: false
-            })
+    anturiStyle = () => {
+        return {
+            backgroundColor: this.state.active ? '#12882c' : '#0a4d19', 
+            left: this.props.anturiSijainti.x !== null ? `'${this.props.anturiSijainti.x}'` : '0',
+             top: this.props.anturiSijainti.y !== null ? `'${this.props.anturiSijainti.y}'` : '0'
         }
-    }
-
-    handleClick = (event) => {
-        console.log(event.target.id);
     }
 
     render() {
@@ -48,7 +40,12 @@ updateLocation(e) {
         }
         const AnturiComponent = posed.div(config);
         return (
-            <AnturiComponent onDragEnd={this.props.onDragStart.bind(this)} style={{backgroundColor: this.state.active ? "#12882c" : "#0a4d19"}} onLoad={this.getAnturiStyle} className="anturiComponent" />      
+            <AnturiComponent 
+            id={this.props.anturi.id} 
+            onDragEnd={this.props.onDragEnd.bind(this)} 
+            style={this.anturiStyle} 
+            onLoad={this.getAnturiStyle} className="anturiComponent" 
+            />      
             )
     }
 }
@@ -58,6 +55,7 @@ Anturi.propTypes = {
     anturi: PropTypes.object.isRequired,
     selectedAnturi: PropTypes.object,
     dimensions: PropTypes.object,
-    onDragStart: PropTypes.func.isRequired
+    onDragEnd: PropTypes.func.isRequired,
+    anturiSijainti: PropTypes.object
 }
 export default Anturi;
