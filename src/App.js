@@ -14,7 +14,9 @@ class App extends Component {
     kartat: [],
     mittaukset: [],
     anturit: [],
-    selectedMap: null
+    anturiSijainnit: [],
+    selectedKartta: null,
+    selectedAnturi: null
   }
 
   // haetaan kartat, kun pääkomponentti kiinnittyy
@@ -79,8 +81,11 @@ returnAnturit = (anturit) => {
  
   }
   // asetetaan valittu kartta
-  setSelected = (inputValue) => {
-    this.setState({ selectedMap: inputValue });
+  setSelectedKartta = (inputValue) => {
+    this.setState({ selectedKartta: inputValue });
+  }
+  setSelectedAnturi = (inputValue) => {
+    this.setState({ selectedAnturi: inputValue });
   }
   // renderöidään komponentti
   render() {
@@ -91,8 +96,8 @@ returnAnturit = (anturit) => {
         </header>
         <div className="container">
           <div className="main-content-kartta">
-            <Valintalaatikko kartat={this.state.kartat} setSelected={this.setSelected} anturit={this.state.anturit} addKartta={this.addKartta} />
-            <Kartta kartta={this.state.selectedMap} anturit={this.state.anturit} />
+            <Valintalaatikko kartat={this.state.kartat} anturit={this.state.anturit} setSelectedKartta={this.setSelectedKartta} setSelectedAnturi={this.setSelectedAnturi} addKartta={this.addKartta} />
+            <Kartta selectedKartta={this.state.selectedKartta} anturit={this.state.anturit} selectedAnturi={this.state.selectedAnturi} anturiSijainnit={this.state.anturiSijainnit} />
           </div>
           <div className="main-content-mittaukset">
             <table className="mittaus-table">

@@ -5,7 +5,6 @@ import ASyncCreatableSelect from 'react-select/lib/AsyncCreatable';
 import KartanLisays from './KartanLisays';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
-import Axios from 'axios';
 
 
 
@@ -79,12 +78,13 @@ class Valintalaatikko extends Component {
     // käsitellään kartan valinnan muutokset alasvetovalikossa
     handleKChange = (newValue) => {
         this.setState({ kartta: newValue });
-        this.props.setSelected(newValue);
+        this.props.setSelectedKartta(newValue);
     };
 
     // käsitellään anturin valinnan muutokset alasvetovalikossa
     handleAChange = (newValue) => {
         this.setState({ anturi: newValue });
+        this.props.setSelectedAnturi(newValue);
     };
 
     // uuden kartan luonnin käsittely
@@ -214,7 +214,7 @@ Valintalaatikko.propTypes = {
     kartat: PropTypes.array.isRequired,
     anturit: PropTypes.array.isRequired,
     addKartta: PropTypes.func.isRequired,
-    setSelected: PropTypes.func.isRequired
+    setSelectedKartta: PropTypes.func.isRequired
 }
 
 export default Valintalaatikko
