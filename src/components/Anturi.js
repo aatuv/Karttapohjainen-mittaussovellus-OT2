@@ -44,15 +44,12 @@ updateLocation(e) {
             dragBounds: {
                 top: Math.round(-this.props.dimensions.height / 2), left: Math.round(-this.props.dimensions.width / 2),
                 right: Math.round(this.props.dimensions.width / 2), bottom: Math.round(this.props.dimensions.height / 2)
-            },
-            dragStart: {
-                x: this.props.onDragStart.bind(this)
             }
         }
         const AnturiComponent = posed.div(config);
         return (
-            <AnturiComponent style={{backgroundColor: this.state.active ? "#12882c" : "#0a4d19"}} onLoad={this.getAnturiStyle} className="anturiComponent" />
-        )
+            <AnturiComponent onDragEnd={this.props.onDragStart.bind(this)} style={{backgroundColor: this.state.active ? "#12882c" : "#0a4d19"}} onLoad={this.getAnturiStyle} className="anturiComponent" />      
+            )
     }
 }
 

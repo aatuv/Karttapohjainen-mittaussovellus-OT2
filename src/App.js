@@ -52,7 +52,6 @@ returnKartat = (kartat) => {
     })
     return 0;
   })
-  console.table(tmp);
   return tmp;
 }
 
@@ -67,7 +66,6 @@ returnAnturit = (anturit) => {
     })
     return 0;
   })
-  console.table(tmp);
   return tmp;
 }
 

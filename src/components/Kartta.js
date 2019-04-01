@@ -15,8 +15,14 @@ class Kartta extends Component {
         y: 0
     }
 
-    onDragStart(x, y) {
-        this.setState({ x: x, y: y });
+    onDragStart(e) {
+        e.preventDefault();
+        let currTarget = e.currentTarget.getBoundingClientRect();
+        const offsetX = e.pageX - currTarget.left;
+        const offsetY = e.pageY - currTarget.top;
+        console.log(currTarget)
+        console.log(` x: ${offsetX}, y: ${offsetY} `);
+        this.setState({ x: offsetX, y: offsetY });
       }
     // ladatessa kuvatiedosto, asetetaan komponentin tilaan sen isäelementin (johon kuva sovittuu) mitat
     onLoad({target:div}) {
