@@ -12,7 +12,7 @@ module.exports =
         });
     },
     insertSensor: (req, res) => {
-        conn.query('INSERT INTO anturi (NAME, DESCRIPTION) VALUES (?, ?)', [req.body.name, req.body.description], (err, rows) => {
+        conn.query('INSERT INTO anturi (NAME) VALUES (?)', [req.body.name], (err, rows) => {
             if (err) {
                 console.log(err);
                 res.status(500).json({
