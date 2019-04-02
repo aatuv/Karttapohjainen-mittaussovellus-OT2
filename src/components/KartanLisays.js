@@ -55,7 +55,6 @@ class KartanLisays extends Component {
       .then(res => {
         this.handleClose();
         console.log(res);
-        //this.props.setNewKartta(res);
         this.props.handleShowSuccess();
         const newKartta = {
           label: res.data.name,
@@ -109,7 +108,7 @@ class KartanLisays extends Component {
             <Modal.Title>Lisää kartta</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <input type="file" maxLength="30" onChange={(e) => this.fileSelectedHandler(e)} />
+            <input type="file" accept="image/*" maxLength="30" onChange={(e) => this.fileSelectedHandler(e)} />
             {progress}
             {imgPreview}
           </Modal.Body>

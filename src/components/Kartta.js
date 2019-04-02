@@ -16,7 +16,10 @@ class Kartta extends Component {
     }
 
     onDragEnd(e) {
-        const k = e.target.parentElement;
+        var k = e.target.parentElement;
+        if (k === null) {
+            k = document.querySelector('div.kartta');
+        }
         const kartta = k.getBoundingClientRect();
         const offsetX = Math.round(e.pageX - kartta.left);
         const offsetY = Math.round(e.pageY - kartta.top);
@@ -50,7 +53,6 @@ class Kartta extends Component {
                         selectedAnturi={this.props.selectedAnturi}
                         anturiSijainnit={this.props.anturiSijainnit}
                         onDragEnd={this.onDragEnd}
-                        setSijainti={this.props.setSijainti}
                         selectedKarttaId={this.props.selectedKartta.id}
                     />
                 </div>

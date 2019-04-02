@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 
 
 class Anturi extends Component {
-    state = {
-        active: false
-    }
 
     // metodi käsittelee anturielementin paikan muutokset kartan päällä
 
@@ -18,14 +15,20 @@ class Anturi extends Component {
         }
     }*/
     anturiStyle = () => {
-        let onko = false;
+        let onkoSijainti = false;
+        let onkoValittu = false;
         if (this.props.anturiSijainti !== undefined) {
-            onko = true;
+            onkoSijainti = true;
+        }
+        if (this.props.selectedAnturi !== null) {
+             if (this.props.selectedAnturi.id === this.props.anturi.id) {
+            onkoValittu = true;
+             }
         }
         return {
-            backgroundColor: this.state.active ? "#12882c" : "#0a4d19", 
-            left: onko ? `${this.props.anturiSijainti.x}px` : '0px',
-             top: onko ? `${this.props.anturiSijainti.y}px` : '0px',
+            backgroundColor: onkoValittu ? "#0e5f20" : "#1ac940", 
+            left: onkoSijainti ? `${this.props.anturiSijainti.x}px` : '0px',
+             top: onkoSijainti ? `${this.props.anturiSijainti.y}px` : '0px',
              transform: 'translateX(0px) translateY(0px)'
         }
     }

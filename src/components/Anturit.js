@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 
 class Anturit extends Component {
+
   render() {
     return this.props.anturit.map((anturi) => (
       <Anturi 
@@ -13,12 +14,14 @@ class Anturit extends Component {
       selectedAnturi={this.props.selectedAnturi} 
       onDragEnd={this.props.onDragEnd} 
       anturiSijainti={this.props.anturiSijainnit.find((anturiSijainti) => {
-          if (anturi.id === anturiSijainti.anturi_id) {
+      /* anturin sijainti on uniikki kullakin kartalla 
+       * (hypoteettinen tilanne, jossa samaa anturia esim. siirrettäisiin kahteen eri paikkaan tms.)
+       */
+          if (anturi.id === anturiSijainti.anturi_id && this.props.selectedKarttaId === anturiSijainti.kartta_id) {
             return anturiSijainti
           } 
           return null;
         })} 
-      setSijainti={this.props.setSijainti}
       selectedKarttaId={this.props.selectedKarttaId}
       />
   ));
@@ -32,8 +35,7 @@ Anturit.propTypes = {
   selectedAnturi: PropTypes.object,
   onDragEnd: PropTypes.func.isRequired,
   anturiSijainnit: PropTypes.array.isRequired,
-  selectedAnturiId: PropTypes.number,
-  setSijainti: PropTypes.func
+  selectedAnturiId: PropTypes.number
 }
 
 export default Anturit;

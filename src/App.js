@@ -21,6 +21,7 @@ class App extends Component {
   componentDidMount() {
     this.getKartat();
     this.getAnturit();
+    this.getAnturiSijainnit();
   }
 
   // palauttaa listan tietokannassa olevista kartoista
@@ -67,7 +68,8 @@ class App extends Component {
       tmp.push({
         id: anturi.ID,
         label: anturi.NAME,
-        value: anturi.DESCRIPTION
+        value: anturi.DESCRIPTION,
+        selected: false
       })
       return 0;
     })
