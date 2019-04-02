@@ -4,26 +4,29 @@ import PropTypes from 'prop-types';
 
 
 class Anturi extends Component {
-    /*
-updateLocation(e) {
-    console.log(e.target);
-    let bounds = e.target.getBoundingClientRect();
-    let x = e.clientX - bounds.left;
-    let y = e.clientY - bounds.top;
-    console.log({x, y});
-}
-*/
     state = {
         active: false
     }
 
     // metodi käsittelee anturielementin paikan muutokset kartan päällä
 
-    anturiStyle = () => {
+    /*anturiStyle = () => {
         return {
-            backgroundColor: this.state.active ? '#12882c' : '#0a4d19', 
-            left: this.props.anturiSijainti.x !== null ? `'${this.props.anturiSijainti.x}'` : '0',
-             top: this.props.anturiSijainti.y !== null ? `'${this.props.anturiSijainti.y}'` : '0'
+            backgroundColor: this.state.active ? "#12882c" : "#0a4d19", 
+            left: (this.props.anturiSijainti.x !== undefined) ? this.props.anturiSijainti.x : '0',
+             top: (this.props.anturiSijainti.y !== undefined) ? this.props.anturiSijainti.y : '0'
+        }
+    }*/
+    anturiStyle = () => {
+        let onko = false;
+        if (this.props.anturiSijainti !== undefined) {
+            onko = true;
+        }
+        return {
+            backgroundColor: this.state.active ? "#12882c" : "#0a4d19", 
+            left: onko ? `${this.props.anturiSijainti.x}px` : '0px',
+             top: onko ? `${this.props.anturiSijainti.y}px` : '0px',
+             transform: 'translateX(0px) translateY(0px)'
         }
     }
 
@@ -34,17 +37,22 @@ updateLocation(e) {
             init: { scale: 1 },
             press: { scale: 0.7 },
             dragBounds: {
-                top: Math.round(-this.props.dimensions.height / 2), left: Math.round(-this.props.dimensions.width / 2),
-                right: Math.round(this.props.dimensions.width / 2), bottom: Math.round(this.props.dimensions.height / 2)
+                // top: Math.round(-this.props.dimensions.height / 2), left: Math.round(-this.props.dimensions.width / 2),
+                // right: Math.round(this.props.dimensions.width / 2), bottom: Math.round(this.props.dimensions.height / 2)
+            },
+            transition: {
+                x: 0,
+                y: 0
             }
         }
         const AnturiComponent = posed.div(config);
         return (
             <AnturiComponent 
+            flipMove={false}
             id={this.props.anturi.id} 
             onDragEnd={this.props.onDragEnd.bind(this)} 
-            style={this.anturiStyle} 
-            onLoad={this.getAnturiStyle} className="anturiComponent" 
+            style={this.anturiStyle()} 
+            className="anturiComponent" 
             />      
             )
     }

@@ -7,8 +7,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';
 
-
-
 class App extends Component {
   state = {
     kartat: [],
@@ -40,6 +38,13 @@ class App extends Component {
         anturit: this.returnAnturit(res.data)
       }));
   }
+  // palauttaa listan tietokannassa olevista anturien sijainneista
+  getAnturiSijainnit() {
+    Axios.get('http://localhost:3001/locations')
+      .then(res => this.setState({
+        anturiSijainnit: this.returnAnturiSijainnit(res.data)
+      }));
+  }
 
   // tietokannasta haettu karttalista muotoon, jossa projektissa käytettävä kirjasto react-select pystyy käsittelemään sitä
   returnKartat = (kartat) => {
@@ -69,74 +74,94 @@ class App extends Component {
     return tmp;
   }
 
-  // lisätään kartan tiedot (nimi, osoite) tietokantaan
-  addKartta = (newKartta) => {
-    Axios.post('http://localhost:3001/maps', newKartta)
-      .then(res => {
-        this.getKartat();
-        console.log(res.data);
+  returnAnturiSijainnit = (sijainnit) => {
+    let tmp = [];
+    sijainnit.map((sijainti) => {
+      tmp.push({
+        kartta_id: sijainti.KARTTA_ID,
+        anturi_id: sijainti.ANTURI_ID,
+        x: sijainti.X,
+        y: sijainti.Y,
       })
+      return 0;
+    })
+    return tmp;
   }
-  // asetetaan valittu kartta
-  setSelectedKartta = (inputValue) => {
-    this.setState({ selectedKartta: inputValue });
-  }
-  setSelectedAnturi = (inputValue) => {
-    this.setState({ selectedAnturi: inputValue });
-  }
-  setSijainti = (offsetX, offsetY, kartta_id, anturi_id) => {
-    const newSijainti = {
-      kartta_id: kartta_id,
-      anturi_id: anturi_id,
-      x: offsetX,
-      y: offsetY
-    }
-    this.setState({
-      anturiSijainnit: [...this.state.anturiSijainnit, newSijainti]
+
+// lisätään kartan tiedot (nimi, osoite) tietokantaan
+addKartta = (newKartta) => {
+  Axios.post('http://localhost:3001/maps', newKartta)
+    .then(res => {
+      this.getKartat();
     });
-  }
-  // renderöidään komponentti
-  render() {
-    return (
-      <div className="App">
-        <header className="header">
-          <h1>Mittarointi</h1>
-        </header>
-        <div className="container">
-          <div className="main-content-kartta">
-            <Valintalaatikko
-              kartat={this.state.kartat}
-              anturit={this.state.anturit}
-              setSelectedKartta={this.setSelectedKartta}
-              setSelectedAnturi={this.setSelectedAnturi}
-              addKartta={this.addKartta}
-            />
-            <Kartta
-              selectedKartta={this.state.selectedKartta}
-              anturit={this.state.anturit}
-              selectedAnturi={this.state.selectedAnturi}
-              anturiSijainnit={this.state.anturiSijainnit}
-              setSijainti={this.setSijainti}
-            />
-          </div>
-          <div className="main-content-mittaukset">
-            <table className="mittaus-table">
-              <caption>valitun anturin nimi tähän</caption>
-              <thead align="center">
-                <Headrow />
-              </thead>
-              <tbody className="mittaus-tbody">
-                <Mittaukset mittaukset={this.state.mittaukset} />
-              </tbody>
-            </table>
-          </div>
+}
+// asetetaan valittu kartta
+setSelectedKartta = (inputValue) => {
+  this.setState({ selectedKartta: inputValue });
+}
+setSelectedAnturi = (inputValue) => {
+  this.setState({ selectedAnturi: inputValue });
+}
+setSijainti = (x, y, kartta_id, anturi_id) => {
+  Axios.get(`http://localhost:3001/findlocation?kartta_id=${kartta_id}&anturi_id=${anturi_id}`)
+  .then(res => {
+    if (res.data === true) {
+      Axios.post('http://localhost:3001/updatelocation', {kartta_id: kartta_id, anturi_id: anturi_id, x: x, y: y})
+      .then(res => {
+        this.getAnturiSijainnit();
+        return;
+      });
+    } else {
+      Axios.post('http://localhost:3001/locations', {kartta_id: kartta_id, anturi_id: anturi_id, x: x, y: y})
+      .then(res => {
+        this.getAnturiSijainnit();
+        return;
+      });
+    }
+  });
+}
+// renderöidään komponentti
+render() {
+  return (
+    <div className="App">
+      <header className="header">
+        <h1>Mittarointi</h1>
+      </header>
+      <div className="container">
+        <div className="main-content-kartta">
+          <Valintalaatikko
+            kartat={this.state.kartat}
+            anturit={this.state.anturit}
+            setSelectedKartta={this.setSelectedKartta}
+            setSelectedAnturi={this.setSelectedAnturi}
+            addKartta={this.addKartta}
+          />
+          <Kartta
+            selectedKartta={this.state.selectedKartta}
+            anturit={this.state.anturit}
+            selectedAnturi={this.state.selectedAnturi}
+            anturiSijainnit={this.state.anturiSijainnit}
+            setSijainti={this.setSijainti}
+          />
         </div>
-        <footer className="footer">
-          <h3>footer</h3>
-        </footer>
+        <div className="main-content-mittaukset">
+          <table className="mittaus-table">
+            <caption>valitun anturin nimi tähän</caption>
+            <thead align="center">
+              <Headrow />
+            </thead>
+            <tbody className="mittaus-tbody">
+              <Mittaukset mittaukset={this.state.mittaukset} />
+            </tbody>
+          </table>
+        </div>
       </div>
-    );
-  }
+      <footer className="footer">
+        <h3>footer</h3>
+      </footer>
+    </div>
+  );
+}
 }
 
 export default App;

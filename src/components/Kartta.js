@@ -24,6 +24,9 @@ class Kartta extends Component {
             return;
         }
         console.log(` x: ${offsetX}, y: ${offsetY} `);
+        console.log(e.target.style);
+        e.target.style.left = offsetX;
+        e.target.style.top = offsetY;
         this.props.setSijainti(offsetX, offsetY, this.props.selectedKarttaId, this.props.anturi.id);
     }
     // ladatessa kuvatiedosto, asetetaan komponentin tilaan sen isäelementin (johon kuva sovittuu) mitat

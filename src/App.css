@@ -173,8 +173,6 @@ caption {
 .kartta {
   display: flex;
   padding: 5px;
-  align-items: center;
-  justify-content: center;
   position: relative;
   box-sizing: border-box;
   z-index: 0;
@@ -194,8 +192,8 @@ caption {
 .anturiComponent {
   width: 30px;
   height: 30px;
+  transform: translateX(0px) translateY(0px);
   background: #12882c;
-  transform-origin: 50% 50%;
   border-radius: 50%;
   position: absolute;
   z-index: 1;

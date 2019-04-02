@@ -12,7 +12,12 @@ class Anturit extends Component {
       anturi={anturi} 
       selectedAnturi={this.props.selectedAnturi} 
       onDragEnd={this.props.onDragEnd} 
-      anturiSijainti={this.props.anturiSijainnit.filter(anturiSijainti => (anturi.id === anturiSijainti.anturi_id))} 
+      anturiSijainti={this.props.anturiSijainnit.find((anturiSijainti) => {
+          if (anturi.id === anturiSijainti.anturi_id) {
+            return anturiSijainti
+          } 
+          return null;
+        })} 
       setSijainti={this.props.setSijainti}
       selectedKarttaId={this.props.selectedKarttaId}
       />
@@ -26,7 +31,7 @@ Anturit.propTypes = {
   dimensions: PropTypes.object.isRequired,
   selectedAnturi: PropTypes.object,
   onDragEnd: PropTypes.func.isRequired,
-  anturiSijainnit: PropTypes.func.isRequired,
+  anturiSijainnit: PropTypes.array.isRequired,
   selectedAnturiId: PropTypes.number,
   setSijainti: PropTypes.func
 }
