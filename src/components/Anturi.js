@@ -67,6 +67,7 @@ Anturi.propTypes = {
     selectedAnturi: PropTypes.object,
     dimensions: PropTypes.object,
     onDragEnd: PropTypes.func.isRequired,
-    anturiSijainti: PropTypes.object
+    anturiSijainti: PropTypes.object,
+    setSijainti: PropTypes.func.isRequired
 }
 export default Anturi;

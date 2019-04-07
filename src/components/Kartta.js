@@ -15,6 +15,7 @@ class Kartta extends Component {
         y: 0
     }
 
+    // päivitetään anturin paikka kartan päällä
     onDragEnd(e) {
         var k = e.target.parentElement;
         if (k === null) {
@@ -54,6 +55,7 @@ class Kartta extends Component {
                         anturiSijainnit={this.props.anturiSijainnit}
                         onDragEnd={this.onDragEnd}
                         selectedKarttaId={this.props.selectedKartta.id}
+                        setSijainti={this.props.setSijainti}
                     />
                 </div>
             )

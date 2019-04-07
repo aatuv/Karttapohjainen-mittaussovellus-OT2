@@ -23,6 +23,7 @@ class Anturit extends Component {
           return null;
         })} 
       selectedKarttaId={this.props.selectedKarttaId}
+      setSijainti={this.props.setSijainti}
       />
   ));
   }
@@ -35,7 +36,8 @@ Anturit.propTypes = {
   selectedAnturi: PropTypes.object,
   onDragEnd: PropTypes.func.isRequired,
   anturiSijainnit: PropTypes.array.isRequired,
-  selectedAnturiId: PropTypes.number
+  selectedAnturiId: PropTypes.number,
+  setSijainti: PropTypes.func.isRequired
 }
 
 export default Anturit;

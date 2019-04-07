@@ -76,6 +76,7 @@ class App extends Component {
     return tmp;
   }
 
+  // anturiSijainnit stateen
   returnAnturiSijainnit = (sijainnit) => {
     let tmp = [];
     sijainnit.map((sijainti) => {
@@ -101,9 +102,12 @@ addKartta = (newKartta) => {
 setSelectedKartta = (inputValue) => {
   this.setState({ selectedKartta: inputValue });
 }
+// asetetaan valittu anturi
 setSelectedAnturi = (inputValue) => {
   this.setState({ selectedAnturi: inputValue });
 }
+// sijainti anturille: jos sijainti kys. kartalle on jo, muokataan olemassa olevan rivin koordinaatteja
+// muutoin lisätään uusi rivi
 setSijainti = (x, y, kartta_id, anturi_id) => {
   Axios.get(`http://localhost:3001/findlocation?kartta_id=${kartta_id}&anturi_id=${anturi_id}`)
   .then(res => {
