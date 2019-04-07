@@ -5,9 +5,9 @@ module.exports =
     fetchSensors: (req, res) => {
         conn.query('SELECT * FROM anturi', (err, rows) => {
             if (err) {
-                res.json(err);
+                res.status(500).json(err);
             } else {
-                res.json(rows);
+                res.status(200).json(rows);
             }
         });
     },
