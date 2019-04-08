@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: rgb(58, 57, 57);
+  background: #eee;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.container {
+  display: grid;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: [mainContentKartta] 75% [mainContentMittaukset] 25%;
+  grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;
+  background: #c7c5c7;
+}
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #b8b7b6;
+}
+
+.main-content-kartta {
+  grid-column-start: mainContentKartta;
+  grid-column-end: mainContentKartta;
+  grid-row-start: mainRow;
+  grid-row-end: mainRow;
+  background: #dddcdc;
+}
+
+.main-content-mittaukset {
+  padding: 5px;
+  grid-column-start: mainContentMittaukset;
+  grid-column-end: mainContentMittaukset;
+  grid-row-start: mainRow;
+  grid-row-end: mainRow;
+  display: inline-table;
+  background: #b1b0b0;
+}
+
+.footer {
+  background: #6d6e6e;
+}
+
+.anturi:active {
+  fill: red;
+}
+
+.huone:hover path {
+  cursor: pointer;
+  fill: #837f7f;
+}
+
+button:disabled {
+  border: 1px solid #999999;
+  background: #cccccc;
+  color: #666666;
+}
+
+button:disabled:hover {
+  cursor: not-allowed;
+  border: 1px solid #999999;
+  background: #cccccc;
+  color: #666666;
+}
+
+.img-preview-div {
+  padding: 10px;
+  width: 700px;
+  height: 400px;
+}
+
+.img-preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.input-file {
+  width: 50px;
+}
+
+.kartta {
+  display: flex;
+  padding: 5px;
+  position: relative;
+  z-index: 0;
+}
+
+.img-kartta {
+  max-width: 100%;
+  max-height: 100%;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  position: static;
+}
+
+.anturiComponent {
+  width: 30px;
+  height: 30px;
+  transform: translateX(0px) translateY(0px);
+  background-color: #1ac940;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5));
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.footer, .header, .main-content-mittaukset, .valinnat {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
