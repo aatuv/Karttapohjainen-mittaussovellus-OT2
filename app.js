@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const sensors = require('./api/routes/sensors');
 const maps = require('./api/routes/maps');
 const locations = require('./api/routes/locations');
+const measurements = require('./api/routes/measurements');
 const cors = require('cors');
 
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', sensors);
 app.use('/', maps);
 app.use('/', locations);
+app.use('/', measurements);
 
 //404
 app.use((req, res) => {

@@ -12,7 +12,7 @@ module.exports =
         });
     },
     insertMeasurement: (req, res) => {
-        conn.query('INSERT INTO mittaus (ANTURI_ID, TEMPERATURE, ATMOSP_PRESSURE, REL_AIR_HUMIDITY) VALUES (?,?,?,?)', [req.body.anturi_id, req.body.ilmanpaine, req.body.ilmankosteus], (err, rows) => {
+        conn.query('INSERT INTO mittaus (ANTURI_ID, TEMPERATURE, ATMOSP_PRESSURE, REL_AIR_HUMIDITY) VALUES (?,?,?,?)', [req.body.anturi_id, req.body.lampotila, req.body.ilmanpaine, req.body.ilmankosteus], (err, rows) => {
             if (err) {
                 console.log(err.message);
                 res.status(500).json({
