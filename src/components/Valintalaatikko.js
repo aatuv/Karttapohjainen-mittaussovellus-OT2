@@ -59,7 +59,6 @@ class Valintalaatikko extends Component {
     }
     // näytetään virheilmoitus, jos kartan lisäys epäonnistuu
     handleShowError = (message) => {
-        console.log("message: " + message)
         new Promise(resolve => {
             setTimeout(
                 resolve(this.setState({

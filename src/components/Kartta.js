@@ -27,8 +27,6 @@ class Kartta extends Component {
         if (offsetX < 0 || offsetX > kartta.width || offsetY < 0 || offsetY > kartta.height) { // ei tallenneta koordinaatteja, jos kursori viedään yli kartasta
             return;
         }
-        console.log(` x: ${offsetX}, y: ${offsetY} `);
-        console.log(e.target.style);
         e.target.style.left = offsetX;
         e.target.style.top = offsetY;
         this.props.setSijainti(offsetX, offsetY, this.props.selectedKarttaId, this.props.anturi.id);

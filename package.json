@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
     "immutability-helper": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",

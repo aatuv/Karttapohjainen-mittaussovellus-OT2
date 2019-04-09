@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Kartta from './components/Kartta';
 import Valintalaatikko from './components/Valintalaatikko';
 import Mittaukset from './components/Mittaukset';
+import Graafit from './components/Graafit';
 import Table from 'react-bootstrap/Table';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Axios from 'axios';
-
 class App extends Component {
   state = {
     kartat: [],
@@ -24,6 +24,10 @@ class App extends Component {
     this.getAnturiSijainnit();
     this.getMittaukset();
   }
+
+  // componentWillMount() {
+  //   setInterval(this.getMittaukset.bind(this), 10000);
+  // }
 
   // palauttaa listan tietokannassa olevista kartoista
   getKartat() {
@@ -48,7 +52,7 @@ class App extends Component {
       }));
   }
   getMittaukset() {
-    Axios.get('http://localhost:3001/measurements?anturi_id=3')
+    Axios.get('http://localhost:3001/measurements')
       .then(res => this.setState({
         mittaukset: res.data
       }));
@@ -133,8 +137,26 @@ class App extends Component {
         }
       });
   }
+
+  returnSelectedAnturi() {
+    if (this.state.selectedAnturi === null) {
+      return "";
+    } else {
+      return this.state.selectedAnturi.value
+    }
+  }
+
+  returnLampotilaData() {
+    var data = [];
+    if (this.state.selectedAnturi !== null) {
+      data = this.state.mittaukset.filter(mittaus => mittaus.deviceId === this.state.selectedAnturi.value);
+    }
+    return data;
+  }
+
   // renderöidään komponentti
   render() {
+    let valittuAnturi = this.returnSelectedAnturi();
     return (
       <div className="App">
         <header className="header">
@@ -158,19 +180,23 @@ class App extends Component {
             />
           </div>
           <div className="main-content-mittaukset">
-            <Table striped bordered hover style={{ width: '100%'}}>
+            <h2>Valittu anturi: {valittuAnturi}</h2>
+            <Table striped bordered hover size="sm" style={{ width: '100%', height: '300px', overflowY: 'scroll', display: 'block' }}>
               <thead>
                 <tr>
-                  <th>Aika</th>
-                  <th>Lämpötila</th>
-                  <th>Ilmanpaine</th>
-                  <th>Ilmankosteus</th>
+                  <th className="mittaus-thead">Aika</th>
+                  <th className="mittaus-thead">Lämpötila</th>
+                  <th className="mittaus-thead">Ilmanpaine</th>
+                  <th className="mittaus-thead">Ilmankosteus</th>
                 </tr>
               </thead>
               <tbody>
-                <Mittaukset mittaukset={this.state.mittaukset} />
+                <Mittaukset selectedAnturi={this.state.selectedAnturi} mittaukset={this.state.mittaukset} />
               </tbody>
             </Table>
+          </div>
+          <div className="main-content-charts">
+            <Graafit mittaukset={this.returnLampotilaData()} />
           </div>
         </div>
         <footer className="footer">

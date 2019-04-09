@@ -25,8 +25,8 @@ a {
   width: 100%;
   height: 100%;
   grid-template-columns: [mainContentKartta] 75% [mainContentMittaukset] 25%;
-  grid-template-rows: [headerRow] 15% [mainRow] 70% [footerRow] 15%;
-  background: #c7c5c7;
+  grid-template-rows: [headerRow] 15% [mainRow] 45% [ChartRow] 25% [footerRow] 15%;
+  background: #f5f4f4;
 }
 
 .header {
@@ -41,7 +41,7 @@ a {
   grid-column-end: mainContentKartta;
   grid-row-start: mainRow;
   grid-row-end: mainRow;
-  background: #dddcdc;
+  background: #f5f4f4;
 }
 
 .main-content-mittaukset {
@@ -51,7 +51,16 @@ a {
   grid-row-start: mainRow;
   grid-row-end: mainRow;
   display: inline-table;
-  background: #b1b0b0;
+  background: #f5f4f4;
+}
+.main-content-charts {
+  padding: 5px;
+  grid-column-start: mainContentKartta;
+  grid-column-end: mainContentMittaukset;
+  grid-row-start: MainRow;
+  grid-row-end: chartRow;
+  display: inline-table;
+  background: #f5f4f4;
 }
 
 .footer {
@@ -130,4 +139,10 @@ button:disabled:hover {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+}
+
+.mittaus-thead {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
 }
