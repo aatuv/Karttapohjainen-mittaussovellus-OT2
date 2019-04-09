@@ -1,60 +1,27 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE TABLE anturi (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  NAME varchar(60) NOT NULL UNIQUE,
+  DESCRIPTION varchar(60) NOT NULL,
+);
 
--- --------------------------------------------------------
+CREATE TABLE kartta (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  NAME varchar(60) NOT NULL UNIQUE,
+  PATH varchar(2083) NOT NULL,
+);
 
-DROP TABLE IF EXISTS `kartta`;
-CREATE TABLE IF NOT EXISTS `kartta` (
-`ID` int NOT NULL AUTO_INCREMENT,
-`NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
-`PATH` varchar(2083) CHARACTER SET latin1 NOT NULL,
- UNIQUE KEY (`NAME`),
- PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
-
--- --------------------------------------------------------
-
-DROP TABLE IF EXISTS `anturi`;
-CREATE TABLE IF NOT EXISTS `anturi` (
-`ID` int NOT NULL AUTO_INCREMENT,
-`NAME` varchar(60) CHARACTER SET latin1 NOT NULL,
-`DESCRIPTION` varchar(100) CHARACTER SET latin1,
- PRIMARY KEY (`ID`),
- UNIQUE KEY (`NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
--- -------------------------------------------------------
-
-DROP TABLE IF EXISTS `mittaus`;
-CREATE TABLE IF NOT EXISTS `mittaus` (
-`ID` int NOT NULL AUTO_INCREMENT,
-`ANTURI_ID` int NOT NULL,
-`TIMESTAMP` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-`TEMPERATURE` DECIMAL(3,1),
-`ATMOSP_PRESSURE` DECIMAL(6,2),
-`REL_AIR_HUMIDITY` DECIMAL(4,4),
- PRIMARY KEY (`ID`),
- CONSTRAINT FK_Anturi FOREIGN KEY (`ANTURI_ID`)
- REFERENCES `anturi`(`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
--- ---------------------------------------------------------
-
-DROP TABLE IF EXISTS `anturi_sijainti`;
-CREATE TABLE IF NOT EXISTS `anturi_sijainti` (
-`ID` int NOT NULL AUTO_INCREMENT,
-`KARTTA_ID` int NOT NULL,
-`ANTURI_ID` int NOT NULL,
-`X` DOUBLE DEFAULT 0 NOT NULL,
-`Y` DOUBLE DEFAULT 0 NOT NULL,
- PRIMARY KEY(`ID`),
- FOREIGN KEY (`KARTTA_ID`)
- REFERENCES `kartta`(`ID`),
- FOREIGN KEY (`ANTURI_ID`)
- REFERENCES `anturi`(`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci;
-
--- --------------------------------------------------------
-
-
-COMMIT;
+CREATE TABLE [dbo].[Mittausdata](	
+	[messageId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[deviceId] [nchar](30) NULL,
+	[Time] datetime DEFAULT(CURRENT_TIMESTAMP) NULL,
+	[temperature] [float] NULL,
+	[humidity] [float] NULL,
+	[pressure] [float] NULL,
+);
+CREATE TABLE anturi_sijainti (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  KARTTA_ID int REFERENCES kartta (ID),
+  ANTURI_ID int REFERENCES anturi (ID),
+  X float DEFAULT 0 NOT NULL,
+  Y float DEFAULT 0 NOT NULL, 
+);
