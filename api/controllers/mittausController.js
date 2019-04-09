@@ -1,28 +1,25 @@
 var conn = require('../../db');
 
-module.exports = 
-{
-    fetchMeasurements: (req, res) => {
-        conn.query('SELECT * FROM mittaus WHERE ANTURI_ID = ?', [req.query.anturi_id], (err, rows) => {
-            if (err) {
-                res.status(500).json(err);
-            } else {
-                res.status(200).json(rows);
-            }
-        });
-    },
-    insertMeasurement: (req, res) => {
-        conn.query('INSERT INTO mittaus (ANTURI_ID, TEMPERATURE, ATMOSP_PRESSURE, REL_AIR_HUMIDITY) VALUES (?,?,?,?)', [req.body.anturi_id, req.body.lampotila, req.body.ilmanpaine, req.body.ilmankosteus], (err, rows) => {
-            if (err) {
-                console.log(err.message);
-                res.status(500).json({
-                    message:"Internal Server Error"
-                });
-            } else {
-                res.status(201).json({
-                    message: "Measurement added!"
-                })
-            }
-        });
+module.exports =
+    {
+        fetchMeasurement: (req, res) => {
+            conn.request.input('anturi_id', req.query.anturi_id);
+            conn.request.query("select * from Mittausdata WHERE deviceId = @anturi_id", (err, rows) => {
+                if (err) {
+                    res.status(500).json(err);
+                } else {
+                    res.status(200).json(rows.recordset);
+                }
+            });
+        },
+
+        fetchMeasurements: (req, res) => {
+            conn.request.query("select * from Mittausdata", (err, rows) => {
+                if (err) {
+                    res.status(500).json(err);
+                } else {
+                    res.status(200).json(rows.recordset);
+                }
+            });
+        }
     }
-}

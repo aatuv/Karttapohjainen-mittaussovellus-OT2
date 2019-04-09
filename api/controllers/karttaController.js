@@ -4,26 +4,30 @@ module.exports =
     {
 
         fetchMaps: (req, res) => {
-            conn.query('SELECT * FROM kartta', (err, rows) => {
+            conn.request.query('select * from kartta', (err, rows) => {
                 if (err) {
-                    res.json(err);
+                    console.log(err);
+                    res.json({
+                        message: "fetchMaps virhe"
+                    });
                 } else {
-                    res.json(rows);
+                    res.status(200).send(rows.recordset);
                 }
             });
         },
         insertMap: (req, res) => {
-            conn.query('INSERT INTO kartta (NAME, PATH) VALUES (?, ?)', [req.body.label, req.body.value], (err, rows) => {
+            conn.request.input('name', req.body.label);
+            conn.request.input('path', req.body.value);
+            conn.request.query("insert into kartta (NAME, PATH) values(@name, @path)", (err, rows) => {
                 if (err) {
                     console.log(err);
                     res.json({
-                        message: "virhe oli"
+                        message: "insertMap virhe"
                     });
                 } else {
-                    console.log("Kartta lisätty: " + JSON.stringify(rows));
                     res.status(200).json({
-                        data: "lisätty"
-                    }).end();
+                        data: "lisätty kartta"
+                    });
                 }
             });
         }
