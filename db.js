@@ -1,14 +1,18 @@
-const mysql = require('mysql');
+const sql = require('mssql');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'mittaussovellus'
+const dbConfig = {
+    user: 'asd',
+    password: 'Ohjelmistotuotanto2',
+    server: 'ot2.database.windows.net',
+    database: 'OTI22',
+    encrypt: true
+}
+
+const pool = new sql.ConnectionPool(dbConfig).connect(err => {
+    if (err) {
+        console.log(err);
+    }
 });
+const request = new sql.Request(pool);
 
-connection.connect((err) => {
-    if (err) throw err;
-});
-
-module.exports = connection;
+module.exports = { pool, sql, request };
