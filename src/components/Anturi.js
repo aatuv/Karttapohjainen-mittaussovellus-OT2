@@ -4,16 +4,11 @@ import PropTypes from 'prop-types';
 
 
 class Anturi extends Component {
+    componentDidMount() {
+        this.props.setDefaultSijainti(this.props.selectedKarttaId, this.props.anturi.id);
+        console.log(this);
+    }
 
-    // metodi käsittelee anturielementin paikan muutokset kartan päällä
-
-    /*anturiStyle = () => {
-        return {
-            backgroundColor: this.state.active ? "#12882c" : "#0a4d19", 
-            left: (this.props.anturiSijainti.x !== undefined) ? this.props.anturiSijainti.x : '0',
-             top: (this.props.anturiSijainti.y !== undefined) ? this.props.anturiSijainti.y : '0'
-        }
-    }*/
     anturiStyle = () => {
         let onkoSijainti = false;
         let onkoValittu = false;
@@ -21,15 +16,15 @@ class Anturi extends Component {
             onkoSijainti = true;
         }
         if (this.props.selectedAnturi !== null) {
-             if (this.props.selectedAnturi.id === this.props.anturi.id) {
-            onkoValittu = true;
-             }
+            if (this.props.selectedAnturi.id === this.props.anturi.id) {
+                onkoValittu = true;
+            }
         }
         return {
-            backgroundColor: onkoValittu ? "#0e5f20" : "#1ac940", 
-            left: onkoSijainti ? `${this.props.anturiSijainti.x}px` : '0px',
-             top: onkoSijainti ? `${this.props.anturiSijainti.y}px` : '0px',
-             transform: 'translateX(0px) translateY(0px)'
+            backgroundColor: onkoValittu ? "#0e5f20" : "#1ac940",
+            left: onkoSijainti ? `${this.props.anturiSijainti.x - 15}px` : '0px',
+            top: onkoSijainti ? `${this.props.anturiSijainti.y - 15}px` : '0px',
+            transform: 'translateX(0px) translateY(0px)'
         }
     }
 
@@ -40,8 +35,8 @@ class Anturi extends Component {
             init: { scale: 1 },
             press: { scale: 0.7 },
             dragBounds: {
-                // top: Math.round(-this.props.dimensions.height / 2), left: Math.round(-this.props.dimensions.width / 2),
-                // right: Math.round(this.props.dimensions.width / 2), bottom: Math.round(this.props.dimensions.height / 2)
+                //top: -this.props.anturiSijainti.y, left: -this.props.anturiSijainti.x,
+                //right: this.props.dimensions.width - this.props.anturiSijainti.x, bottom: this.props.dimensions.height - this.props.anturiSijainti.y
             },
             transition: {
                 x: 0,
@@ -50,14 +45,14 @@ class Anturi extends Component {
         }
         const AnturiComponent = posed.div(config);
         return (
-            <AnturiComponent 
-            flipMove={false}
-            id={this.props.anturi.id} 
-            onDragEnd={this.props.onDragEnd.bind(this)} 
-            style={this.anturiStyle()} 
-            className="anturiComponent" 
-            />      
-            )
+            <AnturiComponent
+                flipMove={false}
+                id={this.props.anturi.id}
+                onDragEnd={this.props.onDragEnd.bind(this)}
+                style={this.anturiStyle()}
+                className="anturiComponent"
+            />
+        )
     }
 }
 
@@ -65,9 +60,11 @@ class Anturi extends Component {
 Anturi.propTypes = {
     anturi: PropTypes.object.isRequired,
     selectedAnturi: PropTypes.object,
+    selectedKarttaId: PropTypes.number.isRequired,
     dimensions: PropTypes.object,
     onDragEnd: PropTypes.func.isRequired,
     anturiSijainti: PropTypes.object,
-    setSijainti: PropTypes.func.isRequired
+    setSijainti: PropTypes.func.isRequired,
+    setDefaultSijainti: PropTypes.func.isRequired
 }
 export default Anturi;

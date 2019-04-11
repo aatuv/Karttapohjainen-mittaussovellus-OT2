@@ -122,7 +122,8 @@ class App extends Component {
   setSijainti = (x, y, kartta_id, anturi_id) => {
     Axios.get(`http://localhost:3001/findlocation?kartta_id=${kartta_id}&anturi_id=${anturi_id}`)
       .then(res => {
-        if (res.data === true) {
+        console.log(res);
+        if (res.data.result === true) {
           Axios.post('http://localhost:3001/updatelocation', { kartta_id: kartta_id, anturi_id: anturi_id, x: x, y: y })
             .then(res => {
               this.getAnturiSijainnit();
@@ -136,6 +137,17 @@ class App extends Component {
             });
         }
       });
+  }
+  setDefaultSijainti = (kartta_id, anturi_id) => {
+    this.setState({
+      anturiSijainnit: this.state.anturiSijainnit.push({
+        kartta_id: kartta_id,
+        anturi_id: anturi_id,
+        x: 0,
+        y: 0
+      })
+    })
+    return;
   }
 
   returnSelectedAnturi() {
@@ -177,6 +189,7 @@ class App extends Component {
               selectedAnturi={this.state.selectedAnturi}
               anturiSijainnit={this.state.anturiSijainnit}
               setSijainti={this.setSijainti}
+              setDefaultSijainti={this.setDefaultSijainti}
             />
           </div>
           <div className="main-content-mittaukset">

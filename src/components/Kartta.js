@@ -54,6 +54,7 @@ class Kartta extends Component {
                         onDragEnd={this.onDragEnd}
                         selectedKarttaId={this.props.selectedKartta.id}
                         setSijainti={this.props.setSijainti}
+                        setDefaultSijainti={this.props.setDefaultSijainti}
                     />
                 </div>
             )
@@ -69,7 +70,8 @@ Kartta.propTypes = {
     anturit: PropTypes.array.isRequired,
     selectedAnturi: PropTypes.object,
     anturiSijainnit: PropTypes.array.isRequired,
-    setSijainti: PropTypes.func.isRequired
+    setSijainti: PropTypes.func.isRequired,
+    setDefaultSijainti: PropTypes.func.isRequired
 }
 
 

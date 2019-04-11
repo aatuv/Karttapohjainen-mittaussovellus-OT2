@@ -15,7 +15,7 @@ class Anturit extends Component {
       onDragEnd={this.props.onDragEnd} 
       anturiSijainti={this.props.anturiSijainnit.find((anturiSijainti) => {
       /* anturin sijainti on uniikki kullakin kartalla 
-       * (hypoteettinen tilanne, jossa samaa anturia esim. siirrettäisiin kahteen eri paikkaan tms.)
+       * (esim. tilanne, jossa samaa anturia esim. siirrettäisiin kahteen eri paikkaan tms.)
        */
           if (anturi.id === anturiSijainti.anturi_id && this.props.selectedKarttaId === anturiSijainti.kartta_id) {
             return anturiSijainti
@@ -24,6 +24,7 @@ class Anturit extends Component {
         })} 
       selectedKarttaId={this.props.selectedKarttaId}
       setSijainti={this.props.setSijainti}
+      setDefaultSijainti={this.props.setDefaultSijainti}
       />
   ));
   }
@@ -37,7 +38,9 @@ Anturit.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   anturiSijainnit: PropTypes.array.isRequired,
   selectedAnturiId: PropTypes.number,
-  setSijainti: PropTypes.func.isRequired
+  selectedKarttaId: PropTypes.number.isRequired,
+  setSijainti: PropTypes.func.isRequired,
+  setDefaultSijainti: PropTypes.func.isRequired
 }
 
 export default Anturit;
