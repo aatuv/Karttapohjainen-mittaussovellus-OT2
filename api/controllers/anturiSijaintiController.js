@@ -38,11 +38,16 @@ module.exports =
             conn.request.query('SELECT * FROM anturi_sijainti WHERE KARTTA_ID = @kartta_id AND ANTURI_ID = @anturi_id', (err, rows) => {
                 if (err) {
                     console.log(err);
-                    res.json({
-                        message: "onko sijainti virhe"
+                    res.status(500).json({
+                        message: "virhe haettaessa sijaintia"
                     });
                 } else {
-                    res.status(200).send(rows.recordset);
+                    console.log(rows.recordset.length);
+                    if (rows.recordset.length !== 0) {
+                    res.status(200).send({"result": true});
+                    } else {
+                    res.status(200).send({"result": false});
+                    }
                 }
             });
         },
@@ -51,7 +56,7 @@ module.exports =
             conn.request.input('anturi_id', req.body.anturi_id);
             conn.request.input('x', req.body.x);
             conn.request.input('y', req.body.y);
-            conn.request.query('UPDATE anturi_sijainti SET X = @x, Y = @y WHERE KARTTA_ID = @kartta_id AND ANTURI_ID = @anturi_id', (err, rows) => {
+            conn.request.query('UPDATE anturi_sijainti SET X = @x, Y = @y WHERE KARTTA_ID = (select ID from kartta where ID = @kartta_id) AND ANTURI_ID = (select ID from anturi where ID = @anturi_id)', (err, rows) => {
                 if (err) {
                     console.log(err);
                     res.json({
