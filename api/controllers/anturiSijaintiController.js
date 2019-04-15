@@ -42,7 +42,6 @@ module.exports =
                         message: "virhe haettaessa sijaintia"
                     });
                 } else {
-                    console.log(rows.recordset.length);
                     if (rows.recordset.length !== 0) {
                     res.status(200).send({"result": true});
                     } else {
@@ -65,6 +64,21 @@ module.exports =
                 } else {
                     res.status(200).json({
                         data: "päivitetty sijainti"
+                    })
+                }
+            });
+        },
+        deleteLocations: (req, res) => {
+            conn.request.input('kartta_id', req.query.id);
+            conn.request.query('delete from anturi_sijainti where KARTTA_ID = @kartta_id', (err, rows) => {
+                if (err) {
+                    console.log(err);
+                    res.json({
+                        message: "deleteLocations virhe"
+                    });
+                } else {
+                    res.status(200).json({
+                        message: "sijainnit poistettu kartalta"
                     })
                 }
             });

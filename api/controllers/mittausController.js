@@ -3,8 +3,8 @@ var conn = require('../../db');
 module.exports =
     {
         fetchMeasurement: (req, res) => {
-            conn.request.input('anturi_id', req.query.anturi_id);
-            conn.request.query("select * from Mittausdata WHERE deviceId = @anturi_id", (err, rows) => {
+            conn.request.input('deviceId', req.query.deviceId);
+            conn.request.query("select * from Mittausdata WHERE deviceId = @deviceId", (err, rows) => {
                 if (err) {
                     res.status(500).json(err);
                 } else {

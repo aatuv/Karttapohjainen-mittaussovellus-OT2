@@ -30,5 +30,20 @@ module.exports =
                     });
                 }
             });
+        },
+        deleteMap: (req, res) => {
+            conn.request.input('id', req.query.id);
+            conn.request.query('delete from kartta where ID=@id', (err, rows) => {
+                if (err) {
+                    console.log(err);
+                    res.json({
+                        message: "deleteMap virhe"
+                    });
+                } else {
+                    res.status(200).json({
+                        message: "kartta poistettu"
+                    })
+                }
+            });
         }
     }

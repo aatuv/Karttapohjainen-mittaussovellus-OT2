@@ -21,7 +21,7 @@ module.exports =
                         message: "insertSensor virhe"
                     });
                 } else {
-                    console.log("Kartta lisätty: " + JSON.stringify(rows));
+                    console.log("Anturi lisätty: ");
                     res.status(200).json({
                         data: "lisätty anturi"
                     });
