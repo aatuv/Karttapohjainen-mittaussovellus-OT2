@@ -10,11 +10,17 @@ class Kartta extends Component {
         this.onLoad = this.onLoad.bind(this);
     }
     state = {
+        loading: true,
         dimensions: {},
         x: 0,
         y: 0
     }
 
+    componentDidMount() {
+        this.setState({
+            loading: true
+        })
+    }
     // päivitetään anturin paikka kartan päällä
     onDragEnd(e) {
         var k = e.target.parentElement;
@@ -37,7 +43,8 @@ class Kartta extends Component {
             dimensions: {
                 height: div.offsetHeight,
                 width: div.offsetWidth
-            }
+            },
+            loading: false
         })
     }
     // renderöidään komponentti
@@ -55,6 +62,7 @@ class Kartta extends Component {
                         selectedKarttaId={this.props.selectedKartta.id}
                         setSijainti={this.props.setSijainti}
                         setDefaultSijainti={this.props.setDefaultSijainti}
+                        setSelectedAnturi={this.props.setSelectedAnturi}
                     />
                 </div>
             )

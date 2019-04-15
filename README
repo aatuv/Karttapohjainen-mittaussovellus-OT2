@@ -1,1 +1,11 @@
-Karttapohjaisen mittarointisovelluksen käyttöliittymä
+Karttapohjaisen mittarointisovelluksen rest api
+
+Rest api vastaanottaa ja käsittelee sovelluksen tietokannan käsittelyyn liittyvään logiikkaan kuuluvia http-kutsuja, mm. karttojen hakeminen ja lisääminen, antureiden hakeminen (ja lisääminen, toistaiseksi ei 
+tosin toteutettuna käyttöliittymässä), anturien sijaintien hakeminen, lisääminen ja päivittäminen, sekä mittausten hakeminen.
+
+Rest api on node.js pohjainen, käytetyt kirjastot (kirjoitushetkellä viimeisimmät versiot):
+
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mssql": "^5.0.5"

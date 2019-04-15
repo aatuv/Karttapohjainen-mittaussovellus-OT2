@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import posed from 'react-pose';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import PropTypes from 'prop-types';
 
 
 class Anturi extends Component {
-    componentDidMount() {
-        this.props.setDefaultSijainti(this.props.selectedKarttaId, this.props.anturi.id);
-        console.log(this);
+    constructor(props) {
+        super(props);
+        this.anturi = React.createRef();
     }
 
     anturiStyle = () => {
@@ -28,30 +29,75 @@ class Anturi extends Component {
         }
     }
 
+    // kun kursori anturipallon päällä
+    renderTooltip() {
+        return (
+            <div
+                style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                    padding: '2px 10px',
+                    color: 'white',
+                    borderRadius: 3,
+                }}
+            >
+                {this.props.anturi.label} {this.props.anturi.value}
+            </div>
+        )
+    }
     render() {
-        const config = {
-            draggable: true,
-            pressable: true,
-            init: { scale: 1 },
-            press: { scale: 0.7 },
-            dragBounds: {
-                //top: -this.props.anturiSijainti.y, left: -this.props.anturiSijainti.x,
-                //right: this.props.dimensions.width - this.props.anturiSijainti.x, bottom: this.props.dimensions.height - this.props.anturiSijainti.y
-            },
-            transition: {
-                x: 0,
-                y: 0
+        var config = null;
+        if (typeof (this.props.anturiSijainti) === 'undefined') {
+            config = {
+                draggable: true,
+                pressable: true,
+                init: { scale: 1 },
+                press: { scale: 0.7 },
+                dragBounds: {
+                    top: 0,
+                    left: 0,
+                    right: this.props.dimensions.width,
+                    bottom: this.props.dimensions.height
+                },
+                transition: {
+                    x: 0,
+                    y: 0
+                }
+            }
+        } else {
+            config = {
+                draggable: true,
+                pressable: true,
+                init: { scale: 1 },
+                press: { scale: 0.7 },
+                dragBounds: {
+                    top: -this.props.anturiSijainti.y,
+                    left: -this.props.anturiSijainti.x,
+                    right: this.props.dimensions.width - this.props.anturiSijainti.x,
+                    bottom: this.props.dimensions.height - this.props.anturiSijainti.y
+                },
+                transition: {
+                    x: 0,
+                    y: 0
+                }
             }
         }
+
         const AnturiComponent = posed.div(config);
         return (
-            <AnturiComponent
-                flipMove={false}
-                id={this.props.anturi.id}
-                onDragEnd={this.props.onDragEnd.bind(this)}
-                style={this.anturiStyle()}
-                className="anturiComponent"
-            />
+            <OverlayTrigger
+                placement="right-start"
+                delay={{ show: 250, hide: 400 }}
+                overlay={this.renderTooltip()}
+            >
+                <AnturiComponent
+                    ref={this.anturi}
+                    flipMove={false}
+                    id={this.props.anturi.id}
+                    onDragEnd={this.props.onDragEnd.bind(this)}
+                    style={this.anturiStyle()}
+                    className="anturiComponent"
+                />
+            </OverlayTrigger>
         )
     }
 }

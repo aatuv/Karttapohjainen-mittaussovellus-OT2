@@ -122,7 +122,7 @@ class Valintalaatikko extends Component {
             }, 1000);
         });
 
-        // asetetaan uusi kartta
+    // asetetaan uusi kartta
     setNewKartta = (newKartta) => {
         this.newKartta = newKartta;
     }
@@ -148,7 +148,7 @@ class Valintalaatikko extends Component {
             LisaysModal = null;
         }
         return (
-            <div>
+            <div style={{flex: '1 1 auto', margin: '5px'}}>
                 <Modal show={this.state.showSuccess}>
                     <Modal.Body>
                         <Alert variant="success">
@@ -189,8 +189,7 @@ class Valintalaatikko extends Component {
                     <div className="col-md-5">
                         <ASyncSelect
                             placeholder="Selaa antureita"
-                            cacheOptions
-                            defaultOptions
+                            defaultOptions={this.props.anturit}
                             loadOptions={this.promiseAnturit}
                             onChange={this.handleAChange}
                             value={this.state.anturi}

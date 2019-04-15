@@ -13,7 +13,7 @@ class Anturit extends Component {
       anturi={anturi} 
       selectedAnturi={this.props.selectedAnturi} 
       onDragEnd={this.props.onDragEnd} 
-      anturiSijainti={this.props.anturiSijainnit.find((anturiSijainti) => {
+      anturiSijainti={this.props.anturiSijainnit.find(anturiSijainti => {
       /* anturin sijainti on uniikki kullakin kartalla 
        * (esim. tilanne, jossa samaa anturia esim. siirrettäisiin kahteen eri paikkaan tms.)
        */
@@ -25,6 +25,7 @@ class Anturit extends Component {
       selectedKarttaId={this.props.selectedKarttaId}
       setSijainti={this.props.setSijainti}
       setDefaultSijainti={this.props.setDefaultSijainti}
+      setSelectedAnturi={this.props.setSelectedAnturi}
       />
   ));
   }
