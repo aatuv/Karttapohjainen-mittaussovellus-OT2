@@ -9,6 +9,8 @@ Projektin käyttöliittymään (React-sovellus) ja palvelinkoodiin (node.js/expr
 Aatu Väisänen
 https://github.com/aatuv
 
+Testaus
+---
 Sovelluksen kunnollista testausta ei ole vielä toteutettu.
 
 Tiedossa olevat bugit: katso bugit- osio.
