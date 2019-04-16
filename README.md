@@ -1,4 +1,4 @@
-Karttapohjainen mittaussovellus (development version)
+Karttapohjainen mittaussovellus (deployable version)
 ===
 
 Ohjelmistotuotanto 2, ryhmä T
