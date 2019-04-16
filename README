@@ -1,0 +1,26 @@
+Karttapohjaisen mittaussovelluksen käyttöliittymä
+
+
+Sovelluksen tarkoituksena on toimia alustana, jolla pystytään seuraamaan Raspberry Pi:n (tai muun antureiden mittausdataa vastaanottavan tietokoneen) tietokantaan lähettämää mittausdataa.
+
+
+Sovellukseen pystyy lisäämään kuvatiedostoja (tarkoituksena siis, että kuvatiedostot ovat huonekarttoja/pohjapiirrustuksia), joiden päälle pystyy vetämään tietokannasta 
+löytyviä antureita kuvastavia palloja niille paikoille, joihin anturit on tosielämässä asentanut. Nämä paikkatiedot tallentuvat tietokantaan käyttäjän liikutellessa palloja kartalla.
+
+Projektissa antureina toimivat bluetoothilla toimivat Ruuvitagit.
+
+Käyttäjä voi valita haluamansa anturin alasvetovalikosta, jolloin kyseisen anturin lähettämä mittausdata (projektissa lämpötila, ilmanpaine, ilmankosteus) näkyy taulussa, sekä visualisoituna graafeina.
+
+Käyttöliittymä on toteutettu Reactilla. Käytettyjä kirjastoja ovat (kirjoitushetkellä viimeisimmät versiot):     
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "echarts": "^4.2.1",
+    "echarts-for-react": "^2.0.15-beta.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.5",
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-dom": "^16.8.5",
+    "react-pose": "^4.0.8",
+    "react-scripts": "2.1.5",
+    "react-select": "^2.4.2"
+

@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+
+body {
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  height: 100vh;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+.App {
+  color: #1d1d2c;
+  background-color: #e4eeee;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5))
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  padding: 15px;
+  background-color: rgb(209, 224, 224);
+  background-image: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,0))
+}
+
+.pageHeadline {
+  padding: 10px;
+  border-radius: 5%;
+  background-color: #2229302d;
+  color: #E9E9E9;
+  box-shadow: 0 0 10px 5px #2229303a;
+}
+.main-content-kartta {
+  padding: 10px;
+}
+.main-content-mittaukset {
+  display: inline-table;
+}
+
+.graafit {
+  background-color: #e4eeee;
+  box-shadow: 0 0 1px 1px #e4eeee;
+}
+
+.footer {
+  height: 100px;
+  width: 100%;
+  padding: 20px;
+  font-weight: 800;
+  bottom: 0;
+  background-color: rgb(209, 224, 224);
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5))
+}
+
+.anturi:active {
+  fill: red;
+}
+
+.huone:hover path {
+  cursor: pointer;
+  fill: #837f7f;
+}
+
+button:disabled {
+  border: 1px solid #999999;
+  background: #cccccc;
+  color: #666666;
+}
+
+button:disabled:hover {
+  cursor: not-allowed;
+  border: 1px solid #999999;
+  background: #cccccc;
+  color: #666666;
+}
+
+.img-preview-div {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.img-preview {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.input-file {
+  width: 50px;
+}
+
+.kartta {
+  display: flex;
+  position: relative;
+  z-index: 0;
+}
+
+.img-kartta {
+  max-width: 100%;
+  max-height: 100%;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  position: static;
+  background: transparent url("/public/ajax-loader.gif") no-repeat scroll center center;
+}
+
+.anturiComponent {
+  width: 30px;
+  height: 30px;
+  transform: translateX(0px) translateY(0px);
+  background-color: #1ac940;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.5));
+  border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.footer, .header, .main-content-mittaukset, .valinnat {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.mittaus-thead {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+.mittausrivi td {
+  align-self: center;
+}
