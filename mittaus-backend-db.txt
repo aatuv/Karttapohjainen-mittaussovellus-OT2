@@ -1,0 +1,27 @@
+CREATE TABLE anturi (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  NAME varchar(60) NOT NULL UNIQUE,
+  DESCRIPTION varchar(60) NOT NULL,
+);
+
+CREATE TABLE kartta (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  NAME varchar(60) NOT NULL UNIQUE,
+  PATH varchar(2083) NOT NULL,
+);
+
+CREATE TABLE [dbo].[Mittausdata](	
+	[messageId] [int] NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[deviceId] [nchar](30) NULL,
+	[Time] [varchar](200) NULL,
+	[temperature] [float] NULL,
+	[humidity] [float] NULL,
+	[pressure] [float] NULL,
+);
+CREATE TABLE anturi_sijainti (
+  ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+  KARTTA_ID int REFERENCES kartta (ID),
+  ANTURI_ID int REFERENCES anturi (ID),
+  X float DEFAULT 0 NOT NULL,
+  Y float DEFAULT 0 NOT NULL, 
+);
