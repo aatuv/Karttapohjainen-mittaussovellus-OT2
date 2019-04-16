@@ -29,11 +29,12 @@ package-lock.json
 package.json
 ```
 
-Miten käynnistää sovellus
+**Miten käynnistää sovellus**
 ---
 Palvelimen käynnistystä on testattu toistaiseksi vain Windows 10- käyttöjärjestelmällä.
 
-##Kun olet ladannut projektikansion tietokoneellesi, noudata seuraavia ohjeita:
+Kun olet ladannut projektikansion tietokoneellesi, noudata seuraavia ohjeita:
+---
 
 1. Avaa komentokehote
 2. Navigoi projektikansioon
