@@ -49,12 +49,10 @@ class KartanLisays extends Component {
         this.setState({
           uploadProgress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100)
         });
-        console.log(`Upload Progress: ${this.state.uploadProgress} %`);
       }
     })
       .then(res => {
         this.handleClose();
-        console.log(res);
         this.props.handleShowSuccess();
         const newKartta = {
           label: res.data.name,
@@ -62,7 +60,6 @@ class KartanLisays extends Component {
         }
         this.props.addKartta(newKartta);
       }).catch((error) => {
-        console.log(error);
         let message = error.response.statusText;
         this.setState({
           show: false,
@@ -91,7 +88,7 @@ class KartanLisays extends Component {
     let progress;
     let imgPreview = null;
     if (inProgress) {
-      progress = <div>Progress: <ProgressBar animated now={this.state.uploadProgress} /></div>
+      progress = <div>Tallennetaan... <ProgressBar animated now={this.state.uploadProgress} /></div>
     } else {
       progress = null;
     }

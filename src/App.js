@@ -273,7 +273,6 @@ class App extends Component {
         }
       })
         .then(res => {
-          console.log(res.data);
           Axios.delete('http://localhost:3001/maps', {
             params: {
               id: this.state.selectedKartta.id
