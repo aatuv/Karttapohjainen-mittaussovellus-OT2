@@ -1,4 +1,4 @@
-Karttapohjaisen mittarointisovelluksen palvelin (development version)
+Karttapohjainen mittaussovellus (development version)
 ===
 
 Ohjelmistotuotanto 2, ryhmä T
@@ -31,6 +31,8 @@ package.json
 Miten käynnistää palvelin
 ---
 Palvelimen käynnistystä on testattu toistaiseksi vain Windows 10- käyttöjärjestelmällä.
+
+Varmista, että tietokoneella on asennettuna node.js. Ohjeet tähän löytyvät verkosta.
 
 Kun olet ladannut projektikansion tietokoneellesi, noudata seuraavia ohjeita:
 ---
