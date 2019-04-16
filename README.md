@@ -29,7 +29,7 @@ package-lock.json
 package.json
 ```
 
-Miten käynnistää palvelin
+Miten käynnistää sovellus
 ---
 Palvelimen käynnistystä on testattu toistaiseksi vain Windows 10- käyttöjärjestelmällä.
 
