@@ -5,10 +5,10 @@ Ohjelmistotuotanto 2, ryhmä T
 
 Ryhmän jäsenet:
 
-Aatu Väisänen
-Aku Tuhkanen
-Kalle Pyykkönen
-Iiro Lievonen
+Aatu Väisänen<br>
+Aku Tuhkanen<br>
+Kalle Pyykkönen<br>
+Iiro Lievonen<br>
 Veeti Raassina
 
 Projektin käyttöliittymään (React-sovellus) ja palvelinkoodiin (node.js/express-sovellus) kontribuoineet henkilöt:
