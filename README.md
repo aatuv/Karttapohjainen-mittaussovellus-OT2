@@ -3,6 +3,14 @@ Karttapohjainen mittaussovellus (deployable version)
 
 Ohjelmistotuotanto 2, ryhmä T
 
+Ryhmän jäsenet:
+
+Aatu Väisänen
+Aku Tuhkanen
+Kalle Pyykkönen
+Iiro Lievonen
+Veeti Raassina
+
 Projektin käyttöliittymään (React-sovellus) ja palvelinkoodiin (node.js/express-sovellus) kontribuoineet henkilöt:
 ---
 
