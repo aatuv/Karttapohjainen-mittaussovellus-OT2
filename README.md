@@ -17,6 +17,11 @@ Projektin käyttöliittymään (React-sovellus) ja palvelinkoodiin (node.js/expr
 Aatu Väisänen
 https://github.com/aatuv
 
+React-sovelluksen lähdekoodi
+---
+https://github.com/Joblor/Karttamitta-OT2/tree/develop
+
+
 Testaus
 ---
 Sovelluksen kunnollista testausta ei ole vielä toteutettu.
