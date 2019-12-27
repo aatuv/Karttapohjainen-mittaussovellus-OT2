@@ -19,7 +19,7 @@ https://github.com/aatuv
 
 React-sovelluksen lähdekoodi
 ---
-https://github.com/Joblor/Karttamitta-OT2/tree/develop
+https://github.com/aatuv/Karttamitta-OT2/tree/develop
 
 
 Testaus
